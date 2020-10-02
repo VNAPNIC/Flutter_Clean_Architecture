@@ -1,0 +1,13 @@
+{
+  "dependencies": {},
+  "devDependencies": {
+    "@arkweid/lefthook": "^0.7.2"
+  },
+  "scripts": {
+    "setup": "npm install && npx lefthook install",
+    "generate": "flutter pub run build_runner build --delete-conflicting-outputs",
+    "activateLocalization": "flutter pub global activate intl_utils",
+    "generateLocale": "flutter pub global run intl_utils:generate",
+    "init": "flutter pub get && npm run generate && npm run activateLocalization && npm run generateLocale"
+  }
+}
