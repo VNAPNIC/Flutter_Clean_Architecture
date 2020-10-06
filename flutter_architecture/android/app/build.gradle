@@ -46,8 +46,8 @@ android {
 
     defaultConfig {
         applicationId "com.vnapnic.flutter_architecture"
-        minSdkVersion 16
-        targetSdkVersion 28
+        minSdkVersion 21
+        targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

@@ -2,6 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_architecture/config/configuration.dart';
+import 'package:flutter_architecture/presentation/login/login_router.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'generated/l10n.dart';
 
 /// EndPoint default
 void main() => Main();
@@ -28,7 +32,15 @@ class _ApplicationState extends State<Application> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'flutter architecture',
-      initialRoute: '',
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        S.delegate,
+      ],
+      locale: const Locale('en'),
+      supportedLocales: S.delegate.supportedLocales,
+      initialRoute: LoginRouter.id,
       onGenerateRoute: manifest,
     );
   }

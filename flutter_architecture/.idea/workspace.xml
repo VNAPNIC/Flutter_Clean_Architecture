@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="453b8109-d539-4c86-9d87-02776a84ca7e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/config/src/interceptor/token_interceptor.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/config/src/route/manifest.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/config/src/route/route_define.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/data/common/api_exception.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/data/common/pref_key.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/data/common/response_error.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/data/common/shared_preferences_manager.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/data/user/repositories/user_repo.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/data/user/source/local/sessions_pref.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/di/module/api_module.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/di/module/components_module.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/di/module/repo_module.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/domain/home/repositories/home_repository.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/domain/home/usecases/home_usecases.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/presentation/home/bloc/home_bloc.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/presentation/home/bloc/home_event.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/presentation/home/bloc/home_state.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/presentation/home/home_router.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/presentation/home/ui/home_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/utility/utils.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/config/config_test.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/data/user/mock.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/data/user/remote/user_repository_test.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/login/domain/login_usecase_test.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/login/mock.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/login/presentation/bloc/login_bloc_test.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/utils_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/config/configuration.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/configuration.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/config/src/env.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/src/env.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/config/src/manifest.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data/user/model/request/login_request.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/user/model/request/login_request.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data/user/model/response/login_response.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/user/model/response/login_response.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data/user/repositories/login_repo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/src/interceptor/auth_interceptor.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data/user/source/remote/user_api.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/user/source/remote/user_api.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/di/injection/injection.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/di/injection/injection.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/di/module/bloc_module.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/di/module/bloc_module.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/domain/login/repositories/login_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/domain/login/repositories/login_repository.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/domain/login/usecases/login_usecases.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/domain/login/usecases/login_usecases.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/generated/intl/messages_en.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/generated/intl/messages_en.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/generated/l10n.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/generated/l10n.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/l10n/intl_en.arb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/l10n/intl_en.arb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/login/bloc/login_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/login/bloc/login_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/login/bloc/login_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/login/bloc/login_event.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/login/bloc/login_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/login/bloc/login_state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/login/login_router.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/login/login_router.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/login/ui/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/login/ui/login_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utility/utils/string_utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utility/utils/string_utils.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1iJ5RHTuofffu8Qvm4BdYvUR0Fy" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="dart.analysis.tool.window.force.activate" value="false" />
+    <property name="io.flutter.reload.alreadyRun" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/domain/home" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\test\data\user\remote" />
+      <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\test\data\user" />
+      <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\lib\data\common" />
+      <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\lib\config\src\router" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\lib\domain\home" />
+      <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\lib\data\common" />
+      <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\lib\di\module" />
+      <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\lib\utility" />
+      <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\lib\di\injection" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Flutter Test.Test login bloc yield the right state completed">
+    <configuration name="Login form usecase" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Login form usecase" />
+      <option name="testFile" value="$PROJECT_DIR$/test/login/domain/login_usecase_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test if api throw TypeError, function will throw Exception" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Test if api throw TypeError, function will throw Exception" />
+      <option name="testFile" value="$PROJECT_DIR$/test/data/user/remote/user_repository_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test login bloc with type cast error" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Test login bloc with type cast error" />
+      <option name="testFile" value="$PROJECT_DIR$/test/login/presentation/bloc/login_bloc_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test login bloc yield the right state completed" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Test login bloc yield the right state completed" />
+      <option name="testFile" value="$PROJECT_DIR$/test/login/presentation/bloc/login_bloc_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="tests in user_repository_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testFile" value="$PROJECT_DIR$/test/data/user/remote/user_repository_test.dart" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Flutter.main.dart" />
+      <item itemvalue="Flutter Test.Test login bloc with type cast error" />
+      <item itemvalue="Flutter Test.Test if api throw TypeError, function will throw Exception" />
+      <item itemvalue="Flutter Test.tests in user_repository_test.dart" />
+      <item itemvalue="Flutter Test.Login form usecase" />
+      <item itemvalue="Flutter Test.Test login bloc yield the right state completed" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Flutter Test.Test login bloc yield the right state completed" />
+        <item itemvalue="Flutter Test.Login form usecase" />
+        <item itemvalue="Flutter Test.Test if api throw TypeError, function will throw Exception" />
+        <item itemvalue="Flutter Test.tests in user_repository_test.dart" />
+        <item itemvalue="Flutter Test.Test login bloc with type cast error" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="453b8109-d539-4c86-9d87-02776a84ca7e" name="Default Changelist" comment="" />
+      <created>1601612844094</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601612844094</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="445" y="195" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601957701093">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state x="445" y="195" key="#com.intellij.execution.impl.EditConfigurationsDialog/1982.0.1858.1080/62.0.1858.1080@62.0.1858.1080" timestamp="1601957701093" />
+    <state x="796" y="256" key="#com.intellij.ide.util.MemberChooser" timestamp="1601968629799">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state x="796" y="256" key="#com.intellij.ide.util.MemberChooser/1982.0.1858.1080/62.0.1858.1080@62.0.1858.1080" timestamp="1601968629799" />
+    <state x="813" y="465" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1601627022373">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state x="813" y="465" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/1982.0.1858.1080/62.0.1858.1080@62.0.1858.1080" timestamp="1601627022373" />
+    <state x="738" y="377" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1601953328411">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state x="738" y="377" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/1982.0.1858.1080/62.0.1858.1080@62.0.1858.1080" timestamp="1601953328411" />
+    <state x="771" y="295" key="FileChooserDialogImpl" timestamp="1601613232542">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state x="771" y="295" key="FileChooserDialogImpl/1982.0.1858.1080/62.0.1858.1080@62.0.1858.1080" timestamp="1601613232542" />
+    <state width="1815" height="375" key="GridCell.Tab.0.bottom" timestamp="1601976243058">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state width="1815" height="375" key="GridCell.Tab.0.bottom/1982.0.1858.1080/62.0.1858.1080@62.0.1858.1080" timestamp="1601976243058" />
+    <state width="1815" height="375" key="GridCell.Tab.0.center" timestamp="1601976243058">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state width="1815" height="375" key="GridCell.Tab.0.center/1982.0.1858.1080/62.0.1858.1080@62.0.1858.1080" timestamp="1601976243058" />
+    <state width="1815" height="375" key="GridCell.Tab.0.left" timestamp="1601976243057">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state width="1815" height="375" key="GridCell.Tab.0.left/1982.0.1858.1080/62.0.1858.1080@62.0.1858.1080" timestamp="1601976243057" />
+    <state width="1815" height="375" key="GridCell.Tab.0.right" timestamp="1601976243058">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state width="1815" height="375" key="GridCell.Tab.0.right/1982.0.1858.1080/62.0.1858.1080@62.0.1858.1080" timestamp="1601976243058" />
+    <state x="647" y="250" key="run.anything.popup" timestamp="1601954799920">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state x="647" y="250" key="run.anything.popup/1982.0.1858.1080/62.0.1858.1080@62.0.1858.1080" timestamp="1601954799920" />
+    <state x="654" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1601972217696">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state x="654" y="235" width="672" height="678" key="search.everywhere.popup/1982.0.1858.1080/62.0.1858.1080@62.0.1858.1080" timestamp="1601972217696" />
+  </component>
+</project>

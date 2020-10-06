@@ -21,6 +21,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
-
+    "connectionProblem" : MessageLookupByLibrary.simpleMessage("There are some problems with the connection. Please try again"),
+    "connectionTimedOut" : MessageLookupByLibrary.simpleMessage("The connection has timed out. Please try again"),
+    "invalidCredentials" : MessageLookupByLibrary.simpleMessage("Invalid credentials")
   };
 }

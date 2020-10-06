@@ -10,8 +10,9 @@ abstract class Env {
       WidgetsFlutterBinding.ensureInitialized();
       await const MethodChannel('flavor')
           .invokeMethod<String>('getFlavor')
-          .then((String flavor) async {})
-          .catchError((error) {});
+          .then((String flavor) async {
+        BuildConfig.init(flavor: flavor);
+      }).catchError((error) {});
 
       await Injection.inject();
       HttpOverrides.global = MyHttpOverrides();

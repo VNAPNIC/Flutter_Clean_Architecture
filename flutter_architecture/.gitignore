@@ -122,3 +122,4 @@ app.*.symbols
 /android/keystore.properties
 /android/app/master.keystore
 /node_modules/
+!.idea/

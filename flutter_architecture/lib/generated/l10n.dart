@@ -33,7 +33,35 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `The connection has timed out. Please try again`
+  String get connectionTimedOut {
+    return Intl.message(
+      'The connection has timed out. Please try again',
+      name: 'connectionTimedOut',
+      desc: '',
+      args: [],
+    );
+  }
 
+  /// `There are some problems with the connection. Please try again`
+  String get connectionProblem {
+    return Intl.message(
+      'There are some problems with the connection. Please try again',
+      name: 'connectionProblem',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid credentials`
+  String get invalidCredentials {
+    return Intl.message(
+      'Invalid credentials',
+      name: 'invalidCredentials',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
