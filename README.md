@@ -41,7 +41,7 @@ flutter pub global run intl_utils:generate
 
 ### Initialize plugins (IntelliJ reference)
 1. Open Flutter intl in `Action`
-2. Click on `Initialize for project`
+2. Click on `arb File`
 
 ![image](screenshots/intl_prompt.png)
 
@@ -50,9 +50,7 @@ flutter pub global run intl_utils:generate
 
 ![image](./screenshots/intl_add_locale.png)
 
-**Current available locale is en, ms_MY**
+**Current available locale is en, en**
 
 
 Link library : https://pub.dev/packages/intl_utils
-
-More details in [confluence](https://setelnow.atlassian.net/wiki/spaces/SL/pages/596640430/Flutter+Project+Structure#2.12.1.-Set-up-your-app)

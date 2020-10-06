@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="453b8109-d539-4c86-9d87-02776a84ca7e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/screenshots/intl_add_locale.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/screenshots/intl_prompt.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshots/intl_prompt.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +36,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/screenshots" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -45,18 +44,18 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\MyProject\Flutter_Architecture" />
+      <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\lib\domain\home" />
+      <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\lib\data\common" />
+      <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\lib\di\module" />
+      <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\lib\utility" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\test\data\user\remote" />
       <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\test\data\user" />
       <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\lib\data\common" />
       <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\lib\config\src\router" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\lib\domain\home" />
-      <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\lib\data\common" />
-      <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\lib\di\module" />
-      <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\lib\utility" />
-      <recent name="D:\MyProject\Flutter_Architecture\flutter_architecture\lib\di\injection" />
     </key>
   </component>
   <component name="RunManager" selected="Flutter.main.dart">
@@ -159,6 +158,10 @@
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
     <state width="1815" height="522" key="GridCell.Tab.0.right/1982.0.1858.1080/62.0.1858.1080@62.0.1858.1080" timestamp="1601977010607" />
+    <state x="687" y="272" width="607" height="536" key="find.popup" timestamp="1601978262912">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state x="687" y="272" width="607" height="536" key="find.popup/1982.0.1858.1080/62.0.1858.1080@62.0.1858.1080" timestamp="1601978262912" />
     <state x="647" y="250" key="run.anything.popup" timestamp="1601954799920">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
