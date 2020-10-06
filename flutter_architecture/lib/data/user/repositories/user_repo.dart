@@ -15,7 +15,7 @@ class UserRepoImpl implements LoginRepository {
   Future<LoginResponse> login(String user, String password) async {
     try {
       // final response = await userApi.login(request);
-      Completer completer = Completer();
+      Completer completer = Completer<LoginResponse>();
       completer.complete(LoginResponse('KbseWdVo87DkmNDO9klriT8SNOkEWRZC'));
       return completer.future;
     } on DioError catch (dioError) {

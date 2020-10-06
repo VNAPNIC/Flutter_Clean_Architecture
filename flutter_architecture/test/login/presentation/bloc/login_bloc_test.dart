@@ -1,4 +1,5 @@
 import 'package:flutter_architecture/data/user/model/response/login_response.dart';
+import 'package:flutter_architecture/generated/l10n.dart';
 import 'package:flutter_architecture/presentation/login/bloc/login_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -34,7 +35,7 @@ void main() {
       LoadingLoginState(),
       ErrorLoginState(
           errorMessage:
-              "There are some problems with the connection. Please try again"),
+          S.current.connectionProblem),
     ];
 
     expectLater(loginBloc, emitsInOrder(expectedState));

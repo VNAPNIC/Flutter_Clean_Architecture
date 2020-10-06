@@ -14,6 +14,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {
+          print('listener $state');
           if (state is CompletedLoginState) {
             Navigator.pushNamed(context, HomeRouter.id,
                 arguments: state.response);
