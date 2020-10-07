@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_architecture/presentation/home/home_router.dart';
+import 'package:flutter_architecture/presentation/home/home_route.dart';
 import 'package:flutter_architecture/presentation/login/bloc/login_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,7 +16,7 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
           print('listener $state');
           if (state is CompletedLoginState) {
-            Navigator.pushNamed(context, HomeRouter.id,
+            Navigator.pushNamed(context, HomeRoute.id,
                 arguments: state.response);
           }
         },

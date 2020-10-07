@@ -2,11 +2,11 @@ part of configuration;
 
 abstract class RouteDefine {
   build(Map<String, WidgetBuilder> routeBuilders, RouteSettings settings){
-    initRouter(settings.arguments).forEach((element) {
+    initRoute(settings.arguments).forEach((element) {
       routeBuilders.addAll(element.path());
     });
   }
-  List<Path> initRouter(Object arguments);
+  List<Path> initRoute(Object arguments);
 }
 
 class Path {

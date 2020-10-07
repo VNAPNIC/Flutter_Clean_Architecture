@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_architecture/config/configuration.dart';
-import 'package:flutter_architecture/presentation/login/login_router.dart';
+import 'package:flutter_architecture/presentation/login/login_route.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'generated/l10n.dart';
@@ -40,7 +40,7 @@ class _ApplicationState extends State<Application> {
       ],
       locale: const Locale('en'),
       supportedLocales: S.delegate.supportedLocales,
-      initialRoute: LoginRouter.id,
+      initialRoute: LoginRoute.id,
       onGenerateRoute: manifest,
     );
   }

@@ -1,13 +1,13 @@
 part of configuration;
 
-void generateRouter(Map<String, WidgetBuilder> builders, RouteSettings settings) {
-  LoginRouter().build(builders, settings);
-  HomeRouter().build(builders, settings);
+void generateRoute(Map<String, WidgetBuilder> builders, RouteSettings settings) {
+  LoginRoute().build(builders, settings);
+  HomeRoute().build(builders, settings);
 }
 
 MaterialPageRoute manifest(RouteSettings settings) {
   final routeBuilders = <String, WidgetBuilder>{};
-  generateRouter(routeBuilders, settings);
+  generateRoute(routeBuilders, settings);
   final Widget Function(BuildContext context) routeBuilder =
       routeBuilders[settings.name];
   return MaterialPageRoute(

@@ -5,11 +5,11 @@ import 'package:flutter_architecture/presentation/home/bloc/home_bloc.dart';
 import 'package:flutter_architecture/presentation/home/ui/home_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeRouter extends RouteDefine {
+class HomeRoute extends RouteDefine {
   static const id = 'home';
 
   @override
-  List<Path> initRouter(Object arguments) => [
+  List<Path> initRoute(Object arguments) => [
     Path(
         name: id,
         builder: (_) => BlocProvider(
