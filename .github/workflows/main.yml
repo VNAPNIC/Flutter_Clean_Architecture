@@ -16,9 +16,9 @@ jobs:
         flutter-version: '1.7.8+hotfix.4'
     - run: flutter pub get
     - run: flutter test
-    - run: flutter build apk --debug --split-per-abi
+    - run: flutter build apk --flavor staging --build-number $(echo $FLUTTER_VERSION | cut -d "+" -f2)
     - name: Create a Release APK
       uses: ncipollo/release-action@v1
       with:
         artifacts: "build/app/outputs/apk/debug/*.apk"
-        token: ${{ secrets.TOKEN }}
+        token: ${{ secrets.WORKFLOW }}
