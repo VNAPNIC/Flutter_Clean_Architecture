@@ -39,28 +39,28 @@ In the project we use Plugin `get_it` to implement DI and we have also defined c
 Inject modules
 ##### module
      * Declare the modules used in the project.
-     * All modules must extend DIModule
+     * All modules must extend "DIModule"
      * The registers must be set in the func provides.
-     * When you want to call 1 DI just use the syntax. getIt <My Component> ()
-     * Learn more about get_it
+     * When you want to call 1 DI just use the syntax. "getIt<My Component>()"
+     * Learn more about "get_it"
 
 ### Routes
 The project has predefined Named routes RouteDefine + manifest
 ##### 1. RouteDefine
      * All routes must extend this class.
-     * When extending, you will have to override func initRoute, here you will define your routes.
+     * When extending, you will have to override func "initRoute", here you will define your routes.
      * A feature may have multiple routes with different input arguments.
      * Make sure that the ID of each route in your project is unique.
 ##### 2. manifest - `lib/config/src/route/manifest.dart`
-     *  To add a route to the project you just need to declare in the func generateRoute. Each route will be provided with a func build, you must call it in the func generateRoute of manifest to register.
+     *  To add a route to the project you just need to declare in the func "generateRoute". Each route will be provided with a func "build", you must call it in the func "generateRoute" of "manifest" to register.
 ### Network.
      * Project can use retrofit to work with the alternative network for http.
-     * Retrofit is pre-installed in the ApiModule class. You can customize it here
+     * Retrofit is pre-installed in the "ApiModule.dart". You can customize it here
      * All interceptors are defined in the lib/config/src/interceptor/* class
-     * To work with Certificate, please refer to the lib/config/src/http_overrides.dart class, with the default the project accept badCertificate
+     * To work with Certificate, please refer to the "lib/config/src/http_overrides.dart" class, with the default the project accept badCertificate
 
 ### Development environment settings.
-     * All flavor environments are installed in the /lib/config/src/buid_config.dart class.
+     * All flavor environments are installed in the "/lib/config/src/buid_config.dart" class.
      * Basically we are defining 4 development environments: development, staging, preprod and release.
      * Run App
 
