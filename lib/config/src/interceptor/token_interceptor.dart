@@ -9,7 +9,7 @@ class TokenInterceptor extends InterceptorsWrapper {
       return;
     }
     if (unauthorizedTokenCodes.contains(error.response.statusCode)) {
-      RequestOptions request = error.response.request;
+      // RequestOptions request = error.response.request;
     }
   }
 }
