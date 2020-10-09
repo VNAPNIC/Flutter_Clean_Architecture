@@ -99,9 +99,9 @@ for IOS
 ## staging: flutter build ios -t lib/main.dart --flavor development
 
 ## preprod: flutter build ios -t lib/main.dart --flavor development
-```
 
 ## release: flutter build ios -t lib/main.dart --flavor development
+```
 
 ### resources
       * All resources (images, fonts, videos, ...) must be placed in the assets class
