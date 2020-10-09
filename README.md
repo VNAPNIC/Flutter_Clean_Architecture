@@ -8,14 +8,14 @@
 ##### 3. Presentation layer consist of
     * Widgets
     * BLoC
-        * Bloc only manages UI state based on business logic
+    * Bloc only manages UI state based on business logic
 
 ##### 4. Domain layer (Business logic layer)
     * Repositories (interfaces aka idea how the logic would behave)
     * Entities (or models that UI needs)
- * Usecases (user stories)
-        * Typically one function, but can be more if functions are related.
-        * Remember, one class has one responsibility only.
+    * Usecases (user stories)
+    * Typically one function, but can be more if functions are related.
+    * Remember, one class has one responsibility only.
 
 
 ##### 5. Data layer (Data access layer)
@@ -26,7 +26,7 @@
         * request
         * response
     * Repositories (Implementation from Domain layer)
-We build this class working separately and not following logics of Domain layer. However, Repositories will still implement from Domain layer, but the Domain layer will follow each function, and the Data layer will follow the cluster of data defined on the server.
+We build this class working separately and not following logics of `Domain layer`. However, Repositories will still implement from Domain layer, but the Domain layer will follow each function, and the Data layer will follow the cluster of data defined on the server.
 For example: Domain layer has defined 2 layers of Login and Register features, but these two features are related to the API User cluster on the server, so in the Data layer, there will only be one Repo which is  User and that Repo will Implement 2 layers Login and Register of the Domain layer.
 
 ##### 6. More insight of layers
