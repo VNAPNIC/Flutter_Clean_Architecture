@@ -1,0 +1,119 @@
+image: cirrusci/flutter:1.22.0
+
+stages:
+  - build
+  - test
+
+before_script:
+#  - curl -sL firebase.tools | bash
+  - flutter pub get
+  - flutter pub run build_runner build
+  - flutter pub global activate pubspec_version
+  - flutter pub global activate intl_utils
+  - flutter pub global run intl_utils:generate
+  - FLUTTER_VERSION=`flutter pub global run pubspec_version:pubver get`
+  - export BUILD_VERSION=$(echo $FLUTTER_VERSION | cut -d "+" -f1)
+  - export BUILD_NUMBER=$(echo $FLUTTER_VERSION | cut -d "+" -f2)
+  - export BUILD_NUMBER=$CI_PIPELINE_IID
+  - echo Build Version $BUILD_VERSION
+  - echo Build Number $BUILD_NUMBER
+  - git log -1 --pretty="- %s" > release_notes/notes.txt
+  - mkdir $CI_PROJECT_DIR/android/app/src/production
+  - if [ -n "$B64_KEYSTORE_PROPERTIES" ]; then echo $B64_KEYSTORE_PROPERTIES | base64 --decode > $CI_PROJECT_DIR/android/app/keystore.properties; fi
+  - if [ -n "$B64_KEYSTORE" ]; then echo $B64_KEYSTORE | base64 --decode > $CI_PROJECT_DIR/android/app/master.keystore; fi
+
+androidDevAuto: &androidDev
+  stage: build
+  script:
+    - export BUILD_COLOR="#2AB1EE"
+    - export BUILD_FLAVOR="Dev"
+    - export BUILD_FLAVOR_KEY="development"
+    - flutter build apk --flavor $BUILD_FLAVOR_KEY --build-number $BUILD_NUMBER
+    - keytool -printcert -jarfile build/app/outputs/apk/$BUILD_FLAVOR_KEY/release/app-$BUILD_FLAVOR_KEY-release.apk
+  artifacts:
+    name: "$CI_JOB_STAGE-$BUILD_NUMBER-$CI_COMMIT_SHORT_SHA"
+    paths:
+      - build/app/outputs
+  only:
+    - develop
+
+androidDev:
+  <<: *androidDev
+  when: manual
+  only:
+    - /^bugfix/.*$/
+    - /^feature/.*$/
+    - /^epic/.*$/
+    - /^hotfix/.*$/
+    - /^refactor/.*$/
+
+androidStagingAuto: &androidStaging
+  stage: build
+  script:
+    - export BUILD_COLOR="#2AB1EE"
+    - export BUILD_FLAVOR="Staging"
+    - export BUILD_FLAVOR_KEY="staging"
+    - flutter build apk --flavor $BUILD_FLAVOR_KEY --build-number $BUILD_NUMBER
+    - keytool -printcert -jarfile build/app/outputs/apk/$BUILD_FLAVOR_KEY/release/app-$BUILD_FLAVOR_KEY-release.apk
+  artifacts:
+    name: "$CI_JOB_STAGE-$BUILD_NUMBER-$CI_COMMIT_SHORT_SHA"
+    paths:
+      - build/app/outputs
+  only:
+    - /^release/.*$/
+
+androidStaging:
+  <<: *androidStaging
+  when: manual
+  only:
+    - /^bugfix/.*$/
+    - /^feature/.*$/
+    - /^epic/.*$/
+    - /^hotfix/.*$/
+    - develop
+
+androidPreprod:
+  stage: build
+  when: manual
+  script:
+    - export BUILD_COLOR="#2AB1EE"
+    - export BUILD_FLAVOR="Preprod"
+    - export BUILD_FLAVOR_KEY="preprod"
+    - flutter build apk --flavor $BUILD_FLAVOR_KEY --build-number $BUILD_NUMBER
+    - keytool -printcert -jarfile build/app/outputs/apk/$BUILD_FLAVOR_KEY/release/app-$BUILD_FLAVOR_KEY-release.apk
+  artifacts:
+    name: "$CI_JOB_STAGE-$BUILD_NUMBER-$CI_COMMIT_SHORT_SHA"
+    paths:
+      - build/app/outputs
+  only:
+    - /^release/.*$/
+    - /^hotfix/.*$/
+
+androidProduction:
+  stage: build
+  when: manual
+  script:
+    - export BUILD_COLOR="#2AB1EE"
+    - export BUILD_FLAVOR="Production"
+    - export BUILD_FLAVOR_KEY="production"
+    - flutter build apk --flavor $BUILD_FLAVOR_KEY --build-number $BUILD_NUMBER
+    - keytool -printcert -jarfile build/app/outputs/apk/$BUILD_FLAVOR_KEY/release/app-$BUILD_FLAVOR_KEY-release.apk
+  artifacts:
+    name: "$CI_JOB_STAGE-$BUILD_NUMBER-$CI_COMMIT_SHORT_SHA"
+    paths:
+      - build/app/outputs
+  only:
+    - /^release/.*$/
+    - master
+
+test:
+  stage: test
+  when: always
+  script:
+    - flutter test --coverage
+  only:
+    - /^bugfix/.*$/
+    - /^feature/.*$/
+    - /^epic/.*$/
+    - /^hotfix/.*$/
+    - develop
