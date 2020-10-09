@@ -51,13 +51,13 @@ The project has predefined Named routes RouteDefine + manifest
      * When extending, you will have to override func initRoute, here you will define your routes.
      * A feature may have multiple routes with different input arguments.
      * Make sure that the ID of each route in your project is unique.
-##### 2. manifest - (lib / config / src / route /  manifest)
+##### 2. manifest - (`lib/config/src/route/manifest`)
      *  To add a route to the project you just need to declare in the func generateRoute. Each route will be provided with a func build, you must call it in the func generateRoute of manifest to register.
 ### Network.
      * Project can use retrofit to work with the alternative network for http.
      * Retrofit is pre-installed in the ApiModule class. You can customize it here
-     * All interceptors are defined in the lib / config / src / interceptor class
-     * To work with Certificate, please refer to the lib / config / src / http_overrides.dart class, with the default the project accept badCertificate
+     * All interceptors are defined in the lib/config/src/interceptor class
+     * To work with Certificate, please refer to the lib/config/src/http_overrides.dart class, with the default the project accept badCertificate
 
 ### Development environment settings.
      * All flavor environments are installed in the /lib/config/src/buid_config.dart class.
@@ -67,13 +67,13 @@ The project has predefined Named routes RouteDefine + manifest
 You can run the app using the commands
 
 ```
-## development: flutter run -t lib / main.dart --debug --flavor development
+## development: flutter run -t lib/main.dart --debug --flavor development
 
-## staging: flutter run -t lib / main.dart --debug --flavor staging
+## staging: flutter run -t lib/main.dart --debug --flavor staging
 
-## preprod: flutter run -t lib / main.dart --debug --flavor preprod
+## preprod: flutter run -t lib/main.dart --debug --flavor preprod
 
-## release: flutter run -t lib / main.dart --release - flavor release
+## release: flutter run -t lib/main.dart --release - flavor release
 ```
 
 ##### Build App
@@ -82,26 +82,26 @@ You can build the app using the commands
 for Android
 
 ```
-## development: flutter build apk -t lib / main.dart --flavor development
+## development: flutter build apk -t lib/main.dart --flavor development
 
-## staging: flutter build apk -t lib / main.dart --flavor staging
+## staging: flutter build apk -t lib/main.dart --flavor staging
 
-## preprod: flutter build apk -t lib / main.dart --flavor preprod
+## preprod: flutter build apk -t lib/main.dart --flavor preprod
 
-## release: flutter build apk -t lib / main.dart --flavor release
+## release: flutter build apk -t lib/main.dart --flavor release
 ```
 
 for IOS
 
 ```
-## development flutter build ios -t lib / main.dart --flavor development
+## development flutter build ios -t lib/main.dart --flavor development
 
-## staging: flutter build ios -t lib / main.dart --flavor development
+## staging: flutter build ios -t lib/main.dart --flavor development
 
-## preprod: flutter build ios -t lib / main.dart --flavor development
+## preprod: flutter build ios -t lib/main.dart --flavor development
 ```
 
-## release: flutter build ios -t lib / main.dart --flavor development
+## release: flutter build ios -t lib/main.dart --flavor development
 
 ### resources
       * All resources (images, fonts, videos, ...) must be placed in the assets class
