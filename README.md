@@ -96,11 +96,11 @@ for IOS
 ```
 ## development flutter build ios -t lib/main.dart --flavor development
 
-## staging: flutter build ios -t lib/main.dart --flavor development
+## staging: flutter build ios -t lib/main.dart --flavor staging
 
-## preprod: flutter build ios -t lib/main.dart --flavor development
+## preprod: flutter build ios -t lib/main.dart --flavor preprod
 
-## release: flutter build ios -t lib/main.dart --flavor development
+## release: flutter build ios -t lib/main.dart --flavor release
 ```
 
 ### resources
