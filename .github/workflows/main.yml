@@ -6,7 +6,7 @@ jobs:
   build:
     name: install dependencies
     # The type of machine to run the job on.
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v1
       - uses: subosito/flutter-action@v1
@@ -15,20 +15,20 @@ jobs:
           channel: 'stable'
 
       - name: install dependencies
-      - run: flutter pub get
+        run: flutter pub get
       - run: flutter pub run build_runner build --delete-conflicting-outputs
       - run: flutter pub global activate intl_utils
       - run: flutter pub global run intl_utils:generate
 
       - name: run tests
-      - run: flutter test
+        run: flutter test
         
-      - name: build run
-      - run: flutter run -t lib/main.dart --debug --flavor development
-      - run: flutter run -t lib/main.dart --debug --flavor staging
-      - run: flutter run -t lib/main.dart --debug --flavor preprod
-      - run: flutter run -t lib/main.dart --debug --flavor release
+#       - name: build run
+#       - run: flutter run -t lib/main.dart --debug --flavor development
+#       - run: flutter run -t lib/main.dart --debug --flavor staging
+#       - run: flutter run -t lib/main.dart --debug --flavor preprod
+#       - run: flutter run -t lib/main.dart --debug --flavor release
 
       - name: build app
-      - run: flutter build apk -t lib/main.dart --flavor preprod
+        run: flutter build apk -t lib/main.dart --flavor preprod
       - run: flutter build apk -t lib/main.dart --flavor release
