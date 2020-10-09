@@ -26,15 +26,15 @@
         * request
         * response
     * Repositories (Implementation from Domain layer)
-We build this class working separately and not following logics of `Domain layer`. However, Repositories will still implement from Domain layer, but the Domain layer will follow each function, and the Data layer will follow the cluster of data defined on the server.
-For example: Domain layer has defined 2 layers of Login and Register features, but these two features are related to the API User cluster on the server, so in the Data layer, there will only be one Repo which is  User and that Repo will Implement 2 layers Login and Register of the Domain layer.
+We build this class working separately and not following logics of `Domain layer`. However, `Repositories` will still implement from `Domain layer`, but the `Domain layer` will follow each function, and the `Data layer` will follow the cluster of data defined on the server.
+For example: `Domain layer` has defined 2 layers of Login and Register features, but these two features are related to the API User cluster on the server, so in the `Data layer`, there will only be one Repo which is user and that Repo will implement 2 layers Login and Register of the `Domain layer`.
 
 ##### 6. More insight of layers
 ![image](https://miro.medium.com/max/772/0*sfCDEb571WD-7EfP.jpg)
 
 ### DI pattern
-Dependency Injection is a great design pattern that allows us to eliminate rigid dependencies between elements and it makes the application more flexible, easy to expand scales and maintain.
-In the project we use Plugin get_it to implement DI and we have also defined classes so you can easily implement DI in the DI layer.
+`Dependency Injection` is a great design pattern that allows us to eliminate rigid dependencies between elements and it makes the application more flexible, easy to expand scales and maintain.
+In the project we use Plugin `get_it` to implement DI and we have also defined classes so you can easily implement `DI` in the `DI layer`.
 ##### injection
 Inject modules
 ##### module
@@ -76,7 +76,7 @@ You can run the app using the commands
 ## release: flutter run -t lib / main.dart --release - flavor release
 ```
 
-     * Build App
+##### Build App
 You can build the app using the commands
 
 for Android
@@ -108,11 +108,11 @@ for IOS
       * Before using them, please declare the path in utility class and the suffix of the class to be type_provide (image_provide.dart)
 
 ### Getting started
-* Get dependencies and generate necessary files.
+Get dependencies and generate necessary files.
 ```
 npm run init
 ```
-* We'll handle the generation of required files for 🚀 your onboarding!
+We'll handle the generation of required files for 🚀 your onboarding!
 
 ### Json parsing / serialization
 This project is implementing [json_serializable](https://pub.dev/packages/json_serializable).
