@@ -56,11 +56,11 @@ The project has predefined Named routes RouteDefine + manifest
 ### Network.
      * Project can use retrofit to work with the alternative network for http.
      * Retrofit is pre-installed in the ApiModule class. You can customize it here
-     * All interceptors are defined in the `lib/config/src/interceptor/*` class
-     * To work with Certificate, please refer to the `lib/config/src/http_overrides.dart` class, with the default the project accept badCertificate
+     * All interceptors are defined in the lib/config/src/interceptor/* class
+     * To work with Certificate, please refer to the lib/config/src/http_overrides.dart class, with the default the project accept badCertificate
 
 ### Development environment settings.
-     * All flavor environments are installed in the `/lib/config/src/buid_config.dart` class.
+     * All flavor environments are installed in the /lib/config/src/buid_config.dart class.
      * Basically we are defining 4 development environments: development, staging, preprod and release.
      * Run App
 
