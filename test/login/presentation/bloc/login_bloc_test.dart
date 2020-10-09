@@ -4,7 +4,7 @@ import 'package:flutter_architecture/presentation/login/bloc/login_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../config/config_test.dart';
+import '../../../config/config.dart';
 import '../../mock.dart';
 
 void main() {

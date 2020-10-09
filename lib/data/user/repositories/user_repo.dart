@@ -14,7 +14,7 @@ class UserRepoImpl implements LoginRepository {
   @override
   Future<LoginResponse> login(String user, String password) async {
     try {
-      // final response = await userApi.login(request);
+      assert(user != null && password!=null);
       Completer completer = Completer<LoginResponse>();
       completer.complete(LoginResponse('KbseWdVo87DkmNDO9klriT8SNOkEWRZC'));
       return completer.future;
