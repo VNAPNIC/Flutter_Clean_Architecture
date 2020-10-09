@@ -50,6 +50,8 @@ android {
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        resValue "string", "app_name", "Flutter Architecture"
     }
 
     signingConfigs {
@@ -80,17 +82,17 @@ android {
         development {
             applicationIdSuffix ".dev"
             versionNameSuffix = "-dev"
-            resValue "string", "app_name", "Concierge Dev"
+            resValue "string", "app_name", "Flutter Architecture Dev"
         }
         staging {
             applicationIdSuffix ".staging"
             versionNameSuffix = "-staging"
-            resValue "string", "app_name", "Concierge Stg"
+            resValue "string", "app_name", "Flutter Architecture Stg"
         }
         preprod {
             applicationIdSuffix ".preprod"
             versionNameSuffix = "-preprod"
-            resValue "string", "app_name", "Concierge Preprod"
+            resValue "string", "app_name", "Flutter Architecture Preprod"
         }
     }
 }

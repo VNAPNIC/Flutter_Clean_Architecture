@@ -72,8 +72,6 @@ You can run the app using the commands
 ## staging: flutter run -t lib/main.dart --debug --flavor staging
 
 ## preprod: flutter run -t lib/main.dart --debug --flavor preprod
-
-## release: flutter run -t lib/main.dart --release - flavor release
 ```
 
 ##### Build App
@@ -87,8 +85,6 @@ for Android
 ## staging: flutter build apk -t lib/main.dart --flavor staging
 
 ## preprod: flutter build apk -t lib/main.dart --flavor preprod
-
-## release: flutter build apk -t lib/main.dart --flavor release
 ```
 
 for IOS
@@ -99,8 +95,6 @@ for IOS
 ## staging: flutter build ios -t lib/main.dart --flavor staging
 
 ## preprod: flutter build ios -t lib/main.dart --flavor preprod
-
-## release: flutter build ios -t lib/main.dart --flavor release
 ```
 
 ### resources
