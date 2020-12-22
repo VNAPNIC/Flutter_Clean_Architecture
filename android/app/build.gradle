@@ -96,9 +96,7 @@ android {
         }
 
         production {
-            applicationIdSuffix ".production"
-            versionNameSuffix = "-production"
-            resValue "string", "app_name", "Flutter Architecture Production"
+            resValue "string", "app_name", "Flutter Architecture"
         }
     }
 }

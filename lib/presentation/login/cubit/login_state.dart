@@ -1,4 +1,4 @@
-part of 'login_bloc.dart';
+part of 'login_cubit.dart';
 
 @immutable
 abstract class LoginState extends Equatable {}
@@ -13,10 +13,10 @@ class LoadingLoginState extends LoginState {
   List<Object> get props => [];
 }
 
-class CompletedLoginState extends LoginState {
+class LoginSuccessfullyState extends LoginState {
   final LoginResponse response;
 
-  CompletedLoginState({this.response});
+  LoginSuccessfullyState({this.response});
 
   @override
   List<Object> get props => [response];

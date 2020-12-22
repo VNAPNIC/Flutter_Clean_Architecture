@@ -7,8 +7,8 @@
 ##### 2. Presentation - Domain - Data.
 ##### 3. Presentation layer consist of
     * Widgets
-    * BLoC
-    * Bloc only manages UI state based on business logic
+    * Cubit
+    * Cubit only manages UI state based on business logic
 
 ##### 4. Domain layer (Business logic layer)
     * Repositories (interfaces aka idea how the logic would behave)
