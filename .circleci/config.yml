@@ -38,14 +38,13 @@ commands:
           command: $FLUTTER_HOME/bin/flutter pub global activate intl_utils
       - run:
           name: Run generateLocale
-          command: $FLUTTER_HOME/bin/flutter pub global run intl_utils:generate    
+          command: $FLUTTER_HOME/bin/flutter pub global run intl_utils:generate
       - run:
           name: Run build_runner
           command: $FLUTTER_HOME/bin/flutter pub run build_runner build
 
   flutter_analyze:
     steps:
-      # TODO maybe we can use result to "Danger".
       - run:
           name: Run flutter analyze
           command: $FLUTTER_HOME/bin/flutter analyze > flutter_analyze_report.txt || true
@@ -94,7 +93,6 @@ commands:
       - run:
           name: Run bundle install
           command: bundle install --path vendor/bundle
-      # TODO store and restore `vendor/bundle` cache
 
   setup_ios_build_setting:
     steps:
