@@ -56,7 +56,7 @@ commands:
             DEPLOYGATE_MESSAGE="branch: $CIRCLE_BRANCH, hash: `git rev-parse --short HEAD`"
             curl \
               -F "token=${DEPLOYGATE_API_TOKEN}" \
-              -F "file=@build/app/outputs/apk/release/app-release.apk" \
+              -F "file=@build\app\outputs\flutter-apk\app-development-release.apk" \
               -F "message=${DEPLOYGATE_MESSAGE}" \
               https://deploygate.com/api/users/${DEPLOYGATE_USER_NAME}/apps
   install_flutter:
@@ -78,7 +78,7 @@ commands:
           command: echo "ruby-2.6.3" > ~/.ruby-version
       - run:
           name: Run bundle install
-          command: bundle install --path vendor/bundle
+          command: sudo bundle install --path vendor/bundle
 
   setup_ios_build_setting:
     steps:
