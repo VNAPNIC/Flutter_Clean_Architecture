@@ -56,7 +56,7 @@ commands:
             DEPLOYGATE_MESSAGE="branch: $CIRCLE_BRANCH, hash: `git rev-parse --short HEAD`"
             curl \
               -F "token=${DEPLOYGATE_API_TOKEN}" \
-              -F "file=@build\app\outputs\flutter-apk\app-development-release.apk" \
+              -F "file=@build/app/outputs/apk/release/app-release.apk" \
               -F "message=${DEPLOYGATE_MESSAGE}" \
               https://deploygate.com/api/users/${DEPLOYGATE_USER_NAME}/apps
   install_flutter:
@@ -105,7 +105,6 @@ jobs:
       - run_build_runner
       - flutter_analyze
       - install_ruby_gems
-      - exec_danger
   build_android:
     executor: default_android
     steps:
