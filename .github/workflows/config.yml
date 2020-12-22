@@ -34,6 +34,9 @@ commands:
       - run:
           name: Run build_runner
           command: $FLUTTER_HOME/bin/flutter pub run build_runner build
+      - run:
+          name: Run build_runner
+          command: $FLUTTER_HOME/bin/flutter test --coverage
 
   flutter_analyze:
     steps:
@@ -48,17 +51,7 @@ commands:
       - run:
           name: Build apk
           command: $FLUTTER_HOME/bin/flutter build apk --release --flavor development
-  deploy_to_deploygate:
-    steps:
-      - run:
-          name: Deploy to DeployGate
-          command: |
-            DEPLOYGATE_MESSAGE="branch: $CIRCLE_BRANCH, hash: `git rev-parse --short HEAD`"
-            curl \
-              -F "token=${42211e14d907c115015b5dbab00ccb66758febec}" \
-              -F "file=@build\app\outputs\flutter-apk\app-development-release.apk" \
-              -F "message=${CICD}" \
-              https://deploygate.com/api/users/${DEPLOYGATE_USER_NAME}/apps
+
   install_flutter:
     steps:
       - run:
@@ -101,7 +94,6 @@ jobs:
       - checkout
       - run_build_runner
       - build_apk
-      - deploy_to_deploygate
   build_ios:
     executor: default_ios
     steps:
