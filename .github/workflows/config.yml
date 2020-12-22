@@ -1,175 +1,156 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
+executors:
+  default_android:
+    shell: /bin/bash --login -eo pipefail
+    environment:
+      LC_ALL: en_US.UTF-8
+      LANG: en_US.UTF-8
+    docker:
+      - image: cirrusci/flutter:latest
+  default_ios:
+    shell: /bin/bash --login -eo pipefail
+    environment:
+      LC_ALL: en_US.UTF-8
+      LANG: en_US.UTF-8
+    macos:
+      # https://circleci.com/docs/2.0/testing-ios/#supported-xcode-versions
+      xcode: "11.3.1"
+
+commands:
+  decrypt_files:
+    steps:
+      - run:
+          name: Decrypt android files
+          command: openssl aes-256-cbc -k $DECRYPT_KEY -d -in android/app/google-services.encrypted.json -out android/app/google-services.json -md sha256
+      - run:
+          name: Decrypt ios files
+          command: openssl aes-256-cbc -k $DECRYPT_KEY -d -in ios/Runner/GoogleService-Info.encrypted.plist -out ios/Runner/GoogleService-Info.plist -md sha256
+  run_build_runner:
+    steps:
+      - run:
+          name: Run package get
+          command: $FLUTTER_HOME/bin/flutter pub get
+      - run:
+          name: Run generate
+          command: $FLUTTER_HOME/bin/flutter pub run build_runner build --delete-conflicting-outputs
+      - run:
+          name: Run activateLocalization
+          command: $FLUTTER_HOME/bin/flutter pub global activate intl_utils
+      - run:
+          name: Run generateLocale
+          command: $FLUTTER_HOME/bin/flutter pub global run intl_utils:generate
+      - run:
+          name: Run build_runner
+          command: $FLUTTER_HOME/bin/flutter pub run build_runner build
+
+  flutter_analyze:
+    steps:
+      - run:
+          name: Run flutter analyze
+          command: $FLUTTER_HOME/bin/flutter analyze > flutter_analyze_report.txt || true
+      - store_artifacts:
+          path: flutter_analyze_report.txt
+
+  exec_danger:
+    steps:
+      - run:
+          name: Run Danger
+          command: bundle exec danger
+
+  build_apk:
+    steps:
+      - run:
+          name: Build apk
+          command: $FLUTTER_HOME/bin/flutter build apk --release --flavor development
+  deploy_to_deploygate:
+    steps:
+      - run:
+          name: Deploy to DeployGate
+          command: |
+            DEPLOYGATE_MESSAGE="branch: $CIRCLE_BRANCH, hash: `git rev-parse --short HEAD`"
+            curl \
+              -F "token=${DEPLOYGATE_API_TOKEN}" \
+              -F "file=@build/app/outputs/apk/release/app-release.apk" \
+              -F "message=${DEPLOYGATE_MESSAGE}" \
+              https://deploygate.com/api/users/${DEPLOYGATE_USER_NAME}/apps
+  install_flutter:
+    steps:
+      - run:
+          name: Install flutter SDK
+          command: mkdir -p ~/sdks/flutter && git clone -b stable https://github.com/flutter/flutter.git ~/sdks/flutter
+      - run:
+          name: Set flutter SDK PATH in bash
+          command: echo 'export FLUTTER_HOME=~/sdks/flutter' >> $BASH_ENV && source $BASH_ENV
+      - run:
+          name: Try doctor
+          command: $FLUTTER_HOME/bin/flutter doctor
+
+  install_ruby_gems:
+    steps:
+      - run:
+          name: Set ruby version
+          command: echo "ruby-2.6.3" > ~/.ruby-version
+      - run:
+          name: Run bundle install
+          command: bundle install --path vendor/bundle
+
+  setup_ios_build_setting:
+    steps:
+      - run:
+          name: Run pod setup
+          command: curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+          working_directory: ~/project/ios
+
+  build_ipa:
+    steps:
+      - run:
+          name: Build flutter app
+          command: $FLUTTER_HOME/bin/flutter build ios --release --flavor development --no-codesign
+      - run:
+          name: Sign ipa
+          command: bundle exec fastlane sign_ipa
+          working_directory: ~/project/ios
+
 jobs:
-   android_tests:
-    working_directory: ~/project/example/android
-    macos:
-      xcode: "9.4.0"
-    environment:
-      JVM_OPTS: -Xmx3200m
-    steps:
-      - checkout:
-          path: ~/project
-      - restore_cache:
-          keys: 
-            - android_cache
-      - run:
-          name: Setup environment variables
-          command: |
-            echo 'export PATH="$PATH:/usr/local/opt/node@8/bin:${HOME}/.yarn/bin:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin:/usr/local/share/android-sdk/tools/bin"' >> $BASH_ENV
-            echo 'export ANDROID_HOME="/usr/local/share/android-sdk"' >> $BASH_ENV
-            echo 'export ANDROID_SDK_HOME="/usr/local/share/android-sdk"' >> $BASH_ENV
-            echo 'export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"' >> $BASH_ENV
-            echo 'export QEMU_AUDIO_DRV=none' >> $BASH_ENV
-            echo 'export JAVA_HOME=/Library/Java/Home' >> $BASH_ENV
-            echo 'export PATH="$PATH:`pwd`/flutter/bin"'  >> $BASH_ENV
-      - run:
-          name: Install Android sdk
-          command: |
-            HOMEBREW_NO_AUTO_UPDATE=1 brew tap homebrew/cask
-            HOMEBREW_NO_AUTO_UPDATE=1 brew cask install android-sdk
-      - run:
-          name: Install emulator dependencies
-          command: (yes | sdkmanager "platform-tools" "platforms;android-26" "extras;intel;Hardware_Accelerated_Execution_Manager" "build-tools;26.0.0" "system-images;android-26;google_apis;x86" "emulator" --verbose) || true
-      - run:
-          name: chmod permissions
-          command: chmod +x ./gradlew
-      - run: avdmanager create avd -n Pixel_2_API_26 -k "system-images;android-26;google_apis;x86" -g google_apis -d "Nexus 5"
-      - run:
-          name: Run emulator in background
-          command: /usr/local/share/android-sdk/tools/emulator @Pixel_2_API_26 -noaudio -no-boot-anim -no-window
-          background: true
-      - run:
-          name: download flutter SDK
-          command: if ! test -f "flutter_sdk.zip"; then curl -o flutter_sdk.zip https://storage.googleapis.com/flutter_infra/releases/stable/macos/flutter_macos_v1.5.4-hotfix.2-stable.zip; fi
-      - run:
-          name: unzip flutter SDK
-          command: unzip flutter_sdk.zip
-      - run: 
-          name: Flutter build
-          command: cd ..; flutter build aot
-      - run:
-          name: Download Android Dependencies
-          command: ./gradlew androidDependencies
-      # - run:
-      #     name: Run UI Tests
-      #     command: ./gradlew app:connectedAndroidTest
-      - run:
-          name: Run Unit Tests
-          command: ./gradlew test
-      - save_cache:
-          key: android_cache
-          paths:
-            - ~/.gradle
-            - flutter_sdk.zip
-
-   flutter_tests:
-    docker:
-      - image: cirrusci/flutter
+  lint:
+    executor: default_android
     steps:
       - checkout
-      - run: sudo gem install bundler:1.16.1
-      - run: bundle check || sudo bundle install        
-      - run: bundle exec danger
-      - run: flutter doctor
-      - run: flutter packages get
-      - run: flutter pub get
-      - run: flutter pub run build_runner build --delete-conflicting-outputs
-      - run: flutter pub global activate intl_utils
-      - run: flutter pub global run intl_utils:generate
-      - run: flutter test --coverage
-      - run: bash <(curl -s https://codecov.io/bash)
-      - run: dartanalyzer --options analysis_options.yaml --fatal-warnings lib
-
-   ios_tests:
-    macos:
-      xcode: "10.2.0"
-    working_directory: ~/project/example/ios
-    environment:
-      FL_OUTPUT_DIR: output
-    steps:
-      - checkout:
-          path: ~/project
-      - restore_cache:
-          keys: 
-            - flutter-cache
-      - run:
-          name: download flutter SDK
-          command: if ! test -f "flutter_sdk.zip"; then curl -o flutter_sdk.zip https://storage.googleapis.com/flutter_infra/releases/stable/macos/flutter_macos_v1.5.4-hotfix.2-stable.zip; fi
-      - run:
-          name: unzip flutter SDK
-          command: unzip flutter_sdk.zip
-      - run:
-          name: export flutter path
-          command: echo 'export PATH="$PATH:`pwd`/flutter/bin"'  >> $BASH_ENV 
-      - run:
-          name: Fetch CocoaPods Specs
-          command: curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh  | bash -s cf
-      - run: flutter doctor
-      - run: 
-          name: Flutter build
-          command: cd ..; flutter build aot
-      - run:
-          name: Update CocoaPods
-          command: pod update
-      - run:
-          name: Install CocoaPods
-          command: pod install --repo-update
-      - run:
-          name: Build and run tests
-          command:  xcodebuild   -workspace Runner.xcworkspace   -scheme Runner   -sdk iphonesimulator   -destination 'platform=iOS Simulator,name=iPhone X,OS=12.2'   test | xcpretty
-      - save_cache:
-          key: flutter-cache
-          paths:
-            - flutter_sdk.zip
-            - Pods
-
-   release:
-    docker:
-      - image: cirrusci/flutter
+      - decrypt_files
+      - run_build_runner
+      - flutter_analyze
+      - install_ruby_gems
+      - exec_danger
+  build_android:
+    executor: default_android
     steps:
       - checkout
-      - run: chmod +x ./release.sh
-      - run: ./release.sh
-
-   publish:
-    macos:
-      xcode: "10.1.0"
+      - decrypt_files
+      - run_build_runner
+      - build_apk
+      - deploy_to_deploygate
+  build_ios:
+    executor: default_ios
     steps:
       - checkout
-      - run: git clone https://InstabugCI:$RELEASE_GITHUB_TOKEN@github.com/Instabug/Escape.git
-      - run: cd Escape; swift build -c release -Xswiftc -static-stdlib
-      - run: cd Escape/.build/release; cp -f Escape /usr/local/bin/escape
-      - run: Escape flutter publish
-      
+      - decrypt_files
+      - install_flutter
+      - install_ruby_gems
+      - run_build_runner
+      - setup_ios_build_setting
+      - build_ipa
+
 workflows:
-  version: 2
-  build-test-and-approval-deploy:
+  check:
     jobs:
-      - flutter_tests:
-          context: cross-platform
-      - android_tests
-      - ios_tests
-      - hold:
-          type: approval
-          requires:
-            - flutter_tests
-            - android_tests
-            - ios_tests
+      - lint
+  build:
+    jobs:
+      - build_android:
           filters:
             branches:
               only: master
-      - publish:
-          context: cross-platform
-          requires:
-            - hold
-          filters:
-            branches:
-              only: master
-      - release:
-          context: cross-platform
-          requires:
-            - hold
+      - build_ios:
           filters:
             branches:
               only: master

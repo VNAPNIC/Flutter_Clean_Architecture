@@ -5,6 +5,7 @@ part 'login_response.g.dart';
 
 @JsonSerializable(nullable: false, explicitToJson: true)
 @JsonSerializable(nullable: false)
+// ignore: must_be_immutable
 class LoginResponse extends Equatable {
   LoginResponse(this.accessToken);
 
