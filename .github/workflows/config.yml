@@ -73,6 +73,10 @@ jobs:
       - run: bundle exec danger
       - run: flutter doctor
       - run: flutter packages get
+      - run: flutter pub get
+      - run: flutter pub run build_runner build --delete-conflicting-outputs
+      - run: flutter pub global activate intl_utils
+      - run: flutter pub global run intl_utils:generate
       - run: flutter test --coverage
       - run: bash <(curl -s https://codecov.io/bash)
       - run: dartanalyzer --options analysis_options.yaml --fatal-warnings lib
