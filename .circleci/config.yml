@@ -75,10 +75,13 @@ commands:
     steps:
       - run:
           name: Set ruby version
-          command: echo "ruby-2.6.3" > ~/.ruby-version
+          command: echo "ruby-2.6.3" > ~/.ruby-version-
+      - run:
+          name: Set ruby version
+          command: sudo chmod -R 655 ~/.bundle
       - run:
           name: Run bundle install
-          command: bundle install
+          command: sudo bundle install gems
 
   setup_ios_build_setting:
     steps:
