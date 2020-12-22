@@ -95,7 +95,6 @@ jobs:
       - checkout
       - run_build_runner
       - flutter_analyze
-      - install_ruby_gems
   build_android:
     executor: default_android
     steps:
@@ -108,7 +107,6 @@ jobs:
     steps:
       - checkout
       - install_flutter
-      - install_ruby_gems
       - run_build_runner
       - setup_ios_build_setting
       - build_ipa
