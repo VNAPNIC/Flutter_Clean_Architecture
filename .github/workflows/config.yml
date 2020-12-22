@@ -1,4 +1,13 @@
-on: [push,pull_request]
+on: 
+  push:
+    branches:
+    - master
+    - release/*
+    - develop
+  pull_request:
+    branches:
+    - master
+    - develop
 name: build and test app
 jobs:
   build:
@@ -29,8 +38,8 @@ jobs:
       #      - run: flutter run -t lib/main.dart --debug --flavor preprod
 
       - name: build development
-        run: flutter build apk -t lib/main.dart --flavor development
-      - name: build staging
-        run: flutter build apk -t lib/main.dart --flavor staging
-      - name: build preprod
-        run: flutter build apk -t lib/main.dart --flavor preprod
+        run: flutter build apk -t lib/main.dart --release --flavor development
+#       - name: build staging
+#         run: flutter build apk -t lib/main.dart --flavor staging
+#       - name: build preprod
+#         run: flutter build apk -t lib/main.dart --flavor preprod
