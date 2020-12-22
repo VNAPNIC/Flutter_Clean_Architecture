@@ -48,13 +48,10 @@ flutter:
   fonts:
     - family: Quicksand
       fonts:
-        - asset: assets/fonts/Quicksand-Bold.ttf
         - asset: assets/fonts/Quicksand-Regular.ttf
-        - asset: assets/fonts/Quicksand-Medium.ttf
     - family: Lato
       fonts:
         - asset: assets/fonts/Lato-Regular.ttf
-        - asset: assets/fonts/Lato-Bold.ttf
 flutter_intl:
   enabled: true
   class_name: S # Optional. Sets the name for the generated localization class. Default: S
