@@ -7,14 +7,14 @@ executors:
       LANG: en_US.UTF-8
     docker:
       - image: cirrusci/flutter:latest
-  default_ios:
-    shell: /bin/bash --login -eo pipefail
-    environment:
-      LC_ALL: en_US.UTF-8
-      LANG: en_US.UTF-8
-    macos:
-      # https://circleci.com/docs/2.0/testing-ios/#supported-xcode-versions
-      xcode: "11.3.1"
+#   default_ios:
+#     shell: /bin/bash --login -eo pipefail
+#     environment:
+#       LC_ALL: en_US.UTF-8
+#       LANG: en_US.UTF-8
+#     macos:
+#       # https://circleci.com/docs/2.0/testing-ios/#supported-xcode-versions
+#       xcode: "11.3.1"
 
 commands:
   run_build_runner:
@@ -64,22 +64,22 @@ commands:
           name: Try doctor
           command: $FLUTTER_HOME/bin/flutter doctor
 
-  setup_ios_build_setting:
-    steps:
-      - run:
-          name: Run pod setup
-          command: curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
-          working_directory: ~/project/ios
+#   setup_ios_build_setting:
+#     steps:
+#       - run:
+#           name: Run pod setup
+#           command: curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+#           working_directory: ~/project/ios
 
-  build_ipa:
-    steps:
-      - run:
-          name: Build flutter app
-          command: $FLUTTER_HOME/bin/flutter build ios --release --flavor development --no-codesign
-      - run:
-          name: Sign ipa
-          command: bundle exec fastlane sign_ipa
-          working_directory: ~/project/ios
+#   build_ipa:
+#     steps:
+#       - run:
+#           name: Build flutter app
+#           command: $FLUTTER_HOME/bin/flutter build ios --release --flavor development --no-codesign
+#       - run:
+#           name: Sign ipa
+#           command: bundle exec fastlane sign_ipa
+#           working_directory: ~/project/ios
 
 jobs:
   lint:
@@ -94,14 +94,14 @@ jobs:
       - checkout
       - run_build_runner
       - build_apk
-  build_ios:
-    executor: default_ios
-    steps:
-      - checkout
-      - install_flutter
-      - run_build_runner
-      - setup_ios_build_setting
-      - build_ipa
+#   build_ios:
+#     executor: default_ios
+#     steps:
+#       - checkout
+#       - install_flutter
+#       - run_build_runner
+#       - setup_ios_build_setting
+#       - build_ipa
 
 workflows:
   check:
