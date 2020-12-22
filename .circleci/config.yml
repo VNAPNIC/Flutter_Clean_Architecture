@@ -43,12 +43,6 @@ commands:
       - store_artifacts:
           path: flutter_analyze_report.txt
 
-  exec_danger:
-    steps:
-      - run:
-          name: Run Danger
-          command: bundle exec danger
-
   build_apk:
     steps:
       - run:
