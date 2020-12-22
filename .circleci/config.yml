@@ -1,13 +1,158 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-# Use a package of configuration called an orb.
-orbs:
-  # Declare a dependency on the welcome-orb
-  welcome: circleci/welcome-orb@0.4.1
-# Orchestrate or schedule a set of jobs
+executors:
+  default_android:
+    shell: /bin/bash --login -eo pipefail
+    environment:
+      LC_ALL: en_US.UTF-8
+      LANG: en_US.UTF-8
+    docker:
+      - image: cirrusci/flutter:latest
+  default_ios:
+    shell: /bin/bash --login -eo pipefail
+    environment:
+      LC_ALL: en_US.UTF-8
+      LANG: en_US.UTF-8
+    macos:
+      # https://circleci.com/docs/2.0/testing-ios/#supported-xcode-versions
+      xcode: "11.3.1"
+
+commands:
+  decrypt_files:
+    steps:
+      - run:
+          name: Decrypt android files
+          command: openssl aes-256-cbc -k $DECRYPT_KEY -d -in android/app/google-services.encrypted.json -out android/app/google-services.json -md sha256
+      - run:
+          name: Decrypt ios files
+          command: openssl aes-256-cbc -k $DECRYPT_KEY -d -in ios/Runner/GoogleService-Info.encrypted.plist -out ios/Runner/GoogleService-Info.plist -md sha256
+  run_build_runner:
+    steps:
+      - run:
+          name: Run package get
+          command: $FLUTTER_HOME/bin/flutter pub get
+      - run:
+          name: Run generate
+          command: $FLUTTER_HOME/bin/flutter pub run build_runner build --delete-conflicting-outputs
+      - run:
+          name: Run activateLocalization
+          command: $FLUTTER_HOME/bin/flutter pub global activate intl_utils
+      - run:
+          name: Run generateLocale
+          command: $FLUTTER_HOME/bin/flutter pub global run intl_utils:generate    
+      - run:
+          name: Run build_runner
+          command: $FLUTTER_HOME/bin/flutter pub run build_runner build
+
+  flutter_analyze:
+    steps:
+      # TODO maybe we can use result to "Danger".
+      - run:
+          name: Run flutter analyze
+          command: $FLUTTER_HOME/bin/flutter analyze > flutter_analyze_report.txt || true
+      - store_artifacts:
+          path: flutter_analyze_report.txt
+
+  exec_danger:
+    steps:
+      - run:
+          name: Run Danger
+          command: bundle exec danger
+
+  build_apk:
+    steps:
+      - run:
+          name: Build apk
+          command: $FLUTTER_HOME/bin/flutter build apk --release --flavor development
+  deploy_to_deploygate:
+    steps:
+      - run:
+          name: Deploy to DeployGate
+          command: |
+            DEPLOYGATE_MESSAGE="branch: $CIRCLE_BRANCH, hash: `git rev-parse --short HEAD`"
+            curl \
+              -F "token=${DEPLOYGATE_API_TOKEN}" \
+              -F "file=@build/app/outputs/apk/release/app-release.apk" \
+              -F "message=${DEPLOYGATE_MESSAGE}" \
+              https://deploygate.com/api/users/${DEPLOYGATE_USER_NAME}/apps
+  install_flutter:
+    steps:
+      - run:
+          name: Install flutter SDK
+          command: mkdir -p ~/sdks/flutter && git clone -b stable https://github.com/flutter/flutter.git ~/sdks/flutter
+      - run:
+          name: Set flutter SDK PATH in bash
+          command: echo 'export FLUTTER_HOME=~/sdks/flutter' >> $BASH_ENV && source $BASH_ENV
+      - run:
+          name: Try doctor
+          command: $FLUTTER_HOME/bin/flutter doctor
+
+  install_ruby_gems:
+    steps:
+      - run:
+          name: Set ruby version
+          command: echo "ruby-2.6.3" > ~/.ruby-version
+      - run:
+          name: Run bundle install
+          command: bundle install --path vendor/bundle
+      # TODO store and restore `vendor/bundle` cache
+
+  setup_ios_build_setting:
+    steps:
+      - run:
+          name: Run pod setup
+          command: curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+          working_directory: ~/project/ios
+
+  build_ipa:
+    steps:
+      - run:
+          name: Build flutter app
+          command: $FLUTTER_HOME/bin/flutter build ios --release --flavor development --no-codesign
+      - run:
+          name: Sign ipa
+          command: bundle exec fastlane sign_ipa
+          working_directory: ~/project/ios
+
+jobs:
+  lint:
+    executor: default_android
+    steps:
+      - checkout
+      - decrypt_files
+      - run_build_runner
+      - flutter_analyze
+      - install_ruby_gems
+      - exec_danger
+  build_android:
+    executor: default_android
+    steps:
+      - checkout
+      - decrypt_files
+      - run_build_runner
+      - build_apk
+      - deploy_to_deploygate
+  build_ios:
+    executor: default_ios
+    steps:
+      - checkout
+      - decrypt_files
+      - install_flutter
+      - install_ruby_gems
+      - run_build_runner
+      - setup_ios_build_setting
+      - build_ipa
+
 workflows:
-  # Name the workflow "welcome"
-  welcome:
-    # Run the welcome/run job in its own container
+  check:
     jobs:
-      - welcome/run
+      - lint
+  build:
+    jobs:
+      - build_android:
+          filters:
+            branches:
+              only: master
+      - build_ios:
+          filters:
+            branches:
+              only: master
