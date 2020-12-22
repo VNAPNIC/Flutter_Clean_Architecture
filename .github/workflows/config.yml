@@ -17,14 +17,6 @@ executors:
       xcode: "11.3.1"
 
 commands:
-  decrypt_files:
-    steps:
-      - run:
-          name: Decrypt android files
-          command: openssl aes-256-cbc -k $DECRYPT_KEY -d -in android/app/google-services.encrypted.json -out android/app/google-services.json -md sha256
-      - run:
-          name: Decrypt ios files
-          command: openssl aes-256-cbc -k $DECRYPT_KEY -d -in ios/Runner/GoogleService-Info.encrypted.plist -out ios/Runner/GoogleService-Info.plist -md sha256
   run_build_runner:
     steps:
       - run:
@@ -51,12 +43,6 @@ commands:
       - store_artifacts:
           path: flutter_analyze_report.txt
 
-  exec_danger:
-    steps:
-      - run:
-          name: Run Danger
-          command: bundle exec danger
-
   build_apk:
     steps:
       - run:
@@ -69,9 +55,9 @@ commands:
           command: |
             DEPLOYGATE_MESSAGE="branch: $CIRCLE_BRANCH, hash: `git rev-parse --short HEAD`"
             curl \
-              -F "token=${DEPLOYGATE_API_TOKEN}" \
-              -F "file=@build/app/outputs/apk/release/app-release.apk" \
-              -F "message=${DEPLOYGATE_MESSAGE}" \
+              -F "token=${42211e14d907c115015b5dbab00ccb66758febec}" \
+              -F "file=@build\app\outputs\flutter-apk\app-development-release.apk" \
+              -F "message=${CICD}" \
               https://deploygate.com/api/users/${DEPLOYGATE_USER_NAME}/apps
   install_flutter:
     steps:
@@ -84,15 +70,6 @@ commands:
       - run:
           name: Try doctor
           command: $FLUTTER_HOME/bin/flutter doctor
-
-  install_ruby_gems:
-    steps:
-      - run:
-          name: Set ruby version
-          command: echo "ruby-2.6.3" > ~/.ruby-version
-      - run:
-          name: Run bundle install
-          command: bundle install --path vendor/bundle
 
   setup_ios_build_setting:
     steps:
@@ -116,16 +93,12 @@ jobs:
     executor: default_android
     steps:
       - checkout
-      - decrypt_files
       - run_build_runner
       - flutter_analyze
-      - install_ruby_gems
-      - exec_danger
   build_android:
     executor: default_android
     steps:
       - checkout
-      - decrypt_files
       - run_build_runner
       - build_apk
       - deploy_to_deploygate
@@ -133,9 +106,7 @@ jobs:
     executor: default_ios
     steps:
       - checkout
-      - decrypt_files
       - install_flutter
-      - install_ruby_gems
       - run_build_runner
       - setup_ios_build_setting
       - build_ipa
