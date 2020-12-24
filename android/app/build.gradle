@@ -82,21 +82,21 @@ android {
         development {
             applicationIdSuffix ".dev"
             versionNameSuffix = "-dev"
-            resValue "string", "app_name", "Flutter Architecture Dev"
+            resValue "string", "app_name", "FArchitecture Dev"
         }
         staging {
             applicationIdSuffix ".staging"
             versionNameSuffix = "-staging"
-            resValue "string", "app_name", "Flutter Architecture Stg"
+            resValue "string", "app_name", "FArchitecture Stg"
         }
         preprod {
             applicationIdSuffix ".preprod"
             versionNameSuffix = "-preprod"
-            resValue "string", "app_name", "Flutter Architecture Preprod"
+            resValue "string", "app_name", "FArchitecture pred"
         }
 
         production {
-            resValue "string", "app_name", "Flutter Architecture"
+            resValue "string", "app_name", "FArchitecture"
         }
     }
 }
