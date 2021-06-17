@@ -1,3 +1,5 @@
+## Supported Null safety
+
 ### Project architecture (Clean Architecture Approach)
 ##### 1. Why:
     * We want to determine what types of database that we use for storage (might want to change it later on)
