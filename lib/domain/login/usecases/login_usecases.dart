@@ -6,6 +6,6 @@ class LoginUseCase {
 
   LoginUseCase(this._loginRepository);
 
-  Future<LoginResponse> login(String user, String password) =>
+  Future<LoginResponse?>? login(String? user, String? password) =>
       _loginRepository.login(user, password);
 }

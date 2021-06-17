@@ -7,7 +7,7 @@ import 'package:mockito/mockito.dart';
 import '../mock.dart';
 
 void main() {
-  UserApi userApi;
+  UserApi? userApi;
   setUp(() {
     userApi = UserApiMock();
   });
@@ -15,7 +15,7 @@ void main() {
   test(
     'Test if api throw TypeError, function will throw Exception',
         () async {
-      when(userApi.login(LoginRequest(user: null, password: null)))
+      when(userApi?.login(LoginRequest(user: null, password: null)))
           .thenThrow(TypeError);
       final repository = UserRepoImpl(userApi: userApi);
       expect(

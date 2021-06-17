@@ -14,7 +14,7 @@ class Main extends Env {
   @override
   FutureOr<StatefulWidget> onCreate() {
     ErrorWidget.builder = (FlutterErrorDetails details) {
-      Zone.current.handleUncaughtError(details.exception, details.stack);
+      Zone.current.handleUncaughtError(details.exception, details.stack!);
       return Container(color: Colors.transparent);
     };
 

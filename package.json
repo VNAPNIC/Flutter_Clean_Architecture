@@ -9,5 +9,23 @@
     "activateLocalization": "flutter pub global activate intl_utils",
     "generateLocale": "flutter pub global run intl_utils:generate",
     "init": "flutter pub get && npm run generate && npm run activateLocalization && npm run generateLocale"
-  }
+  },
+  "name": "flutter_architecture",
+  "description": "* We want to determine what types of database that we use for storage (might want to change it later on)\r     * We want to adhere to SOLID principles since we are using OOP for this project.\r     * We want to ensure that UI layers do not care what is going on at the data layer at all.\r     * We might want to separate each layer into different packages.\r ##### 2. Presentation - Domain - Data.\r ##### 3. Presentation layer consist of\r     * Widgets\r     * Cubit\r     * Cubit only manages UI state based on business logic",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VNAPNIC/Flutter_Architecture.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VNAPNIC/Flutter_Architecture/issues"
+  },
+  "homepage": "https://github.com/VNAPNIC/Flutter_Architecture#readme"
 }

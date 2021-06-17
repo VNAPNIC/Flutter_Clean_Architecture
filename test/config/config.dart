@@ -14,7 +14,7 @@ class TestUtilities {
 
   /// Wrap child widget with [MaterialApp] widget and localization.
   static Future createTestableWidget(WidgetTester tester,
-      {Widget child}) async {
+      {Widget? child}) async {
     await TestUtilities.setupLocalization();
 
     await tester.pumpWidget(TestWidgetWrapper(child: child));
@@ -28,9 +28,9 @@ class TestUtilities {
 /// Wrapper for wrapping widget in Material App.
 /// This will avoid UI exception when running widget.
 class TestWidgetWrapper extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
 
-  const TestWidgetWrapper({Key key, this.child}) : super(key: key);
+  const TestWidgetWrapper({Key? key, this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

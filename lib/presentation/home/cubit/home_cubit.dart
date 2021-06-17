@@ -6,5 +6,5 @@ part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState>{
   HomeUseCase homeUseCase;
-  HomeCubit({this.homeUseCase}) : super(HomeInitial());
+  HomeCubit({required this.homeUseCase}) : super(HomeInitial());
 }

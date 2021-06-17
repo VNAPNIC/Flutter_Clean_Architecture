@@ -2,29 +2,27 @@ import 'package:flutter_architecture/data/common/pref_key.dart';
 import 'package:flutter_architecture/data/common/shared_preferences_manager.dart';
 import 'package:flutter_architecture/di/injection/injection.dart';
 
-class SessionPref{
-  static void saveSession({String accessToken, String refreshToken}) {
+class SessionPref {
+  static void saveSession(
+      {required String accessToken, required String refreshToken}) {
     var preferencesManager = getIt.get<SharedPreferencesManager>();
-    preferencesManager.putString(
-        keyAccessToken, accessToken);
-    preferencesManager.putString(
-        keyRefreshToken, refreshToken);
+    preferencesManager.putString(keyAccessToken, accessToken);
+    preferencesManager.putString(keyRefreshToken, refreshToken);
   }
 
-  static String getAccessToken() => getIt
-      .get<SharedPreferencesManager>()
-      .getString(keyAccessToken);
+  static String? getAccessToken() =>
+      getIt.get<SharedPreferencesManager>().getString(keyAccessToken);
 
-  static String getRefreshToken() => getIt
-      .get<SharedPreferencesManager>()
-      .getString(keyRefreshToken);
+  static String? getRefreshToken() =>
+      getIt.get<SharedPreferencesManager>().getString(keyRefreshToken);
 
   static bool isSessionValid() {
     try {
       return getIt
-          .get<SharedPreferencesManager>()
-          .getString(keyAccessToken)
-          .isNotEmpty;
+              .get<SharedPreferencesManager>()
+              .getString(keyAccessToken)
+              ?.isNotEmpty ==
+          true;
     } catch (e) {
       return false;
     }

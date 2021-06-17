@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_architecture/config/configuration.dart';
+import 'package:flutter_architecture/data/user/model/response/login_response.dart';
 import 'package:flutter_architecture/di/injection/injection.dart';
 import 'package:flutter_architecture/presentation/home/cubit/home_cubit.dart';
 import 'package:flutter_architecture/presentation/home/ui/home_screen.dart';
@@ -9,11 +9,12 @@ class HomeRoute extends RouteDefine {
   static const id = 'home';
 
   @override
-  List<Path> initRoute(Object arguments) => [
+  List<Path> initRoute(Object? arguments) => [
         Path(
             name: id,
             builder: (_) => BlocProvider(
                 create: (_) => getIt<HomeCubit>(),
-                child: HomeScreen(arguments))),
+                child: HomeScreen(response: arguments == null ? null : arguments as LoginResponse )
+            )),
       ];
 }

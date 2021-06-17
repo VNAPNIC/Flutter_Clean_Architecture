@@ -6,13 +6,10 @@ class AuthInterceptor extends Interceptor {
   static const String ACCESS_TOKEN = 'Authorization';
 
   @override
-  Future onRequest(RequestOptions options) async {
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     options.headers['Accept'] = 'application/json';
-
     final session = SessionPref.getAccessToken();
-    if (session != null) {
-      options.headers[ACCESS_TOKEN] = 'Bearer $session';
-    }
-    return super.onRequest(options);
+    options.headers[ACCESS_TOKEN] = 'Bearer $session';
+    super.onRequest(options, handler);
   }
 }

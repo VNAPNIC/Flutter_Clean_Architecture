@@ -16,7 +16,7 @@ class LoadingLoginState extends LoginState {
 class LoginSuccessfullyState extends LoginState {
   final LoginResponse response;
 
-  LoginSuccessfullyState({this.response});
+  LoginSuccessfullyState({required this.response});
 
   @override
   List<Object> get props => [response];
@@ -25,7 +25,7 @@ class LoginSuccessfullyState extends LoginState {
 class ErrorLoginState extends LoginState {
   final String errorMessage;
 
-  ErrorLoginState({this.errorMessage});
+  ErrorLoginState({required this.errorMessage});
 
   @override
   List<Object> get props => [errorMessage];

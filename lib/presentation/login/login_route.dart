@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_architecture/config/configuration.dart';
 import 'package:flutter_architecture/data/user/repositories/user_repo.dart';
 import 'package:flutter_architecture/di/injection/injection.dart';
@@ -12,7 +11,7 @@ class LoginRoute extends RouteDefine {
   static const id_with_param = 'login_with_param';
 
   @override
-  List<Path> initRoute(Object arguments) => [
+  List<Path> initRoute(Object? arguments) => [
         Path(
             name: id,
             builder: (_) => BlocProvider(

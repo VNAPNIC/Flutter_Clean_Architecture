@@ -7,17 +7,16 @@ import 'package:flutter_architecture/domain/login/repositories/login_repository.
 import 'package:dio/dio.dart';
 
 class UserRepoImpl implements LoginRepository {
-  UserApi userApi;
+  UserApi? userApi;
 
   UserRepoImpl({this.userApi});
 
   @override
-  Future<LoginResponse> login(String user, String password) async {
+  Future<LoginResponse?>? login(String? user, String? password) async {
     try {
-      assert(user != null && password!=null);
       Completer completer = Completer<LoginResponse>();
       completer.complete(LoginResponse('KbseWdVo87DkmNDO9klriT8SNOkEWRZC'));
-      return completer.future;
+      return completer.future as Future<LoginResponse>;
     } on DioError catch (dioError) {
       throw ApiException(exception: dioError);
     } catch (e) {

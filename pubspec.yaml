@@ -4,7 +4,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -12,29 +12,29 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   # Design pattern
-  flutter_bloc: ^6.0.5
-  rxdart: ^0.24.1
-  get_it: ^5.0.1
+  flutter_bloc: ^7.0.1
+  rxdart: ^0.27.1
+  get_it: ^7.1.3
 
   # Network
-  retrofit: ^1.3.4
+  retrofit: ^2.0.0
 
   # Common
-  cupertino_icons: ^0.1.3
-  equatable: ^1.2.5
-  intl_translation: ^0.17.10+1
-  json_serializable: ^3.5.0
-  logging: ^0.11.4
-  shared_preferences: ^0.5.12
-  pedantic: ^1.9.2
+  cupertino_icons: ^1.0.2
+  equatable: ^2.0.3
+  logging: ^1.0.1
+  shared_preferences: ^2.0.6
+  pedantic: ^1.11.1
+  intl: ^0.17.0
 
 dev_dependencies:
-  build_runner: ^1.10.0
+  build_runner: ^2.0.0
   flutter_test:
     sdk: flutter
   retrofit_generator: any
-  mockito: ^4.1.1
-  bloc_test: ^7.0.4
+  mockito: ^5.0.10
+  bloc_test: ^8.0.0
+  json_serializable: ^4.1.3
 
 # There are the packages that can't be update.
 #dependency_overrides:

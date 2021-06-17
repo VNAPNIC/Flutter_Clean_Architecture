@@ -6,20 +6,20 @@ import 'package:flutter_architecture/data/common/response_error.dart';
 import 'package:flutter_architecture/generated/l10n.dart';
 
 class ApiException {
-  String errorCode;
+  String? errorCode;
   String errorMessage = "";
-  DioError exception;
-  ApiException({DioError exception}) {
+  DioError? exception;
+
+  ApiException({required DioError exception}) {
     this.exception = exception;
 
     switch (exception.type) {
-      case DioErrorType.RESPONSE:
+      case DioErrorType.response:
         {
-          dynamic errorBody = exception.response.data;
+          dynamic errorBody = exception.response?.data ?? "";
           try {
             // try to parse to response error
-            ResponseError responseError =
-            ResponseError.fromJson(errorBody);
+            ResponseError responseError = ResponseError.fromJson(errorBody);
             errorMessage = responseError.message;
             errorCode = responseError.errorCode;
 
@@ -36,9 +36,9 @@ class ApiException {
               errorMessage = exception.error.toString();
             }
 
-            if (exception.response.statusMessage != null &&
-                exception.response.statusMessage.isNotEmpty) {
-              errorMessage = exception.response.statusMessage;
+            if (exception.response?.statusMessage != null &&
+                exception.response?.statusMessage?.isNotEmpty == true) {
+              errorMessage = exception.response?.statusMessage ?? "";
             }
           }
         }
@@ -46,9 +46,9 @@ class ApiException {
       default:
         {
           switch (exception.type) {
-            case DioErrorType.CONNECT_TIMEOUT:
-            case DioErrorType.RECEIVE_TIMEOUT:
-            case DioErrorType.SEND_TIMEOUT:
+            case DioErrorType.connectTimeout:
+            case DioErrorType.receiveTimeout:
+            case DioErrorType.sendTimeout:
               {
                 errorMessage = S.current.connectionTimedOut;
               }

@@ -15,13 +15,13 @@ class ApiModule extends DIModule {
 
   static FutureOr<Dio> setup() async {
     final options = BaseOptions(
-      connectTimeout: BuildConfig.get().connectTimeout,
-      receiveTimeout: BuildConfig.get().receiveTimeout,
+      connectTimeout: BuildConfig.get()?.connectTimeout,
+      receiveTimeout: BuildConfig.get()?.receiveTimeout,
       responseType: ResponseType.json,
       validateStatus: (status) {
         return true;
       },
-      baseUrl: BuildConfig.get().baseUrl,
+      baseUrl: BuildConfig.get()?.baseUrl ?? "",
     );
     final Dio dio = Dio(options);
 
@@ -32,7 +32,7 @@ class ApiModule extends DIModule {
     dio.interceptors.add(TokenInterceptor());
 
     /// Print Log (production mode removal)
-    if (BuildConfig.get().flavor != Flavor.RELEASE) {
+    if (BuildConfig.get()?.flavor !=null && BuildConfig.get()?.flavor != Flavor.RELEASE) {
       dio.interceptors
           .add(LogInterceptor(requestBody: true, responseBody: true));
     }

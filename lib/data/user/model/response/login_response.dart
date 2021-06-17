@@ -3,20 +3,20 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'login_response.g.dart';
 
-@JsonSerializable(nullable: false, explicitToJson: true)
-@JsonSerializable(nullable: false)
+@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 // ignore: must_be_immutable
 class LoginResponse extends Equatable {
   LoginResponse(this.accessToken);
 
   @JsonKey(name: 'access_token')
-  String accessToken;
+  String? accessToken;
 
   @JsonKey(name: 'refresh_token')
-  String refreshToken;
+  String? refreshToken;
 
   @JsonKey(name: 'refresh_expires_in')
-  int refreshExpiresIn;
+  int? refreshExpiresIn;
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) =>
       _$LoginResponseFromJson(json);
@@ -24,5 +24,6 @@ class LoginResponse extends Equatable {
   Map<String, dynamic> toJson() => _$LoginResponseToJson(this);
 
   @override
-  List<Object> get props => [accessToken, refreshToken, refreshExpiresIn];
+  List<Object> get props =>
+      [accessToken ?? "", refreshToken ?? "", refreshExpiresIn ?? -1];
 }

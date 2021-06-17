@@ -11,15 +11,19 @@ import 'package:meta/meta.dart';
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  final LoginUseCase loginUseCase;
+  final LoginUseCase? loginUseCase;
 
   LoginCubit({this.loginUseCase}) : super(LoginInitial());
 
-  FutureOr<void> login({String user, String password}) async{
+  FutureOr<void> login({String? user, String? password}) async{
     try {
       emit(LoadingLoginState());
-      LoginResponse response = await loginUseCase.login(user, password);
-      emit(LoginSuccessfullyState(response: response));
+      LoginResponse? response = await loginUseCase?.login(user, password);
+      if(response == null){
+        emit(ErrorLoginState(errorMessage: S.current.responseNull));
+      }else {
+        emit(LoginSuccessfullyState(response: response));
+      }
     } on ApiException catch (e) {
       emit(ErrorLoginState(errorMessage: e.errorMessage));
     } catch (_) {
