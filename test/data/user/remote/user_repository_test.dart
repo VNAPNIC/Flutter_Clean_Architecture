@@ -14,12 +14,16 @@ void main() {
 
   test(
     'Test if api throw TypeError, function will throw Exception',
-        () async {
-      when(userApi?.login(LoginRequest(user: null, password: null)))
-          .thenThrow(TypeError);
+    () async {
+      when(
+        userApi?.login(
+          LoginRequest(user: null, password: null),
+        ),
+      ).thenThrow(TypeError);
+
       final repository = UserRepoImpl(userApi: userApi);
       expect(
-            () => repository.login(null,null),
+        () => repository.login(null, null),
         throwsA(
           predicate((e) => e is Exception),
         ),

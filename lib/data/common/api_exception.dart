@@ -10,13 +10,11 @@ class ApiException {
   String errorMessage = "";
   DioError? exception;
 
-  ApiException({required DioError exception}) {
-    this.exception = exception;
-
-    switch (exception.type) {
+  ApiException({this.exception}) {
+    switch (exception?.type) {
       case DioErrorType.response:
         {
-          dynamic errorBody = exception.response?.data ?? "";
+          dynamic errorBody = exception?.response?.data ?? "";
           try {
             // try to parse to response error
             ResponseError responseError = ResponseError.fromJson(errorBody);
@@ -32,20 +30,20 @@ class ApiException {
             errorMessage = e.toString();
 
             // Try to get Dio internal error which might due to service not available
-            if (exception.error != null) {
-              errorMessage = exception.error.toString();
+            if (exception?.error != null) {
+              errorMessage = exception?.error?.toString() ?? "";
             }
 
-            if (exception.response?.statusMessage != null &&
-                exception.response?.statusMessage?.isNotEmpty == true) {
-              errorMessage = exception.response?.statusMessage ?? "";
+            if (exception?.response?.statusMessage != null &&
+                exception?.response?.statusMessage?.isNotEmpty == true) {
+              errorMessage = exception?.response?.statusMessage ?? "";
             }
           }
         }
         break;
       default:
         {
-          switch (exception.type) {
+          switch (exception?.type) {
             case DioErrorType.connectTimeout:
             case DioErrorType.receiveTimeout:
             case DioErrorType.sendTimeout:
@@ -55,9 +53,9 @@ class ApiException {
               break;
             default:
               {
-                if (exception.error is SocketException) {
+                if (exception?.error is SocketException) {
                   errorMessage = S.current.connectionProblem;
-                } else if (exception.error is HttpException) {
+                } else if (exception?.error is HttpException) {
                   errorMessage = S.current.connectionProblem;
                 }
               }

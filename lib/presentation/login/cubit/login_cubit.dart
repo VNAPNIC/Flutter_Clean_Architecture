@@ -19,11 +19,7 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       emit(LoadingLoginState());
       LoginResponse? response = await loginUseCase?.login(user, password);
-      if (response == null) {
-        emit(ErrorLoginState(errorMessage: S.current.responseNull));
-      } else {
-        emit(LoginSuccessfullyState(response: response));
-      }
+      emit(LoginSuccessfullyState(response: response!));
     } on ApiException catch (e) {
       emit(ErrorLoginState(errorMessage: e.errorMessage));
     } catch (_) {

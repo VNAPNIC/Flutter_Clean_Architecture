@@ -6,9 +6,9 @@ import 'package:retrofit/http.dart';
 part 'user_api.g.dart';
 
 @RestApi()
-abstract class UserApi{
+abstract class UserApi {
   factory UserApi(Dio dio, {String baseUrl}) = _UserApi;
 
   @POST('auth/login')
-  Future<LoginResponse> login(@Body() LoginRequest request);
+  Future<LoginResponse?>? login(@Body() LoginRequest request);
 }
