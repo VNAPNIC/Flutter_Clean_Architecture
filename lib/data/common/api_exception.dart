@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_architecture/config/configuration.dart';
+import 'package:configuration/network/interceptor/token_interceptor.dart';
+import 'package:configuration/generated/l10n.dart';
 import 'package:flutter_architecture/data/common/response_error.dart';
-import 'package:flutter_architecture/generated/l10n.dart';
 
 class ApiException {
   String? errorCode;

@@ -1,5 +1,4 @@
-import 'package:flutter_architecture/config/configuration.dart';
-import 'package:flutter_architecture/di/injection/injection.dart';
+import 'package:configuration/di/di_module.dart';
 import 'package:flutter_architecture/domain/home/usecases/home_usecases.dart';
 import 'package:flutter_architecture/presentation/home/cubit/home_cubit.dart';
 

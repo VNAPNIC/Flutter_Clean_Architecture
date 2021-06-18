@@ -1,6 +1,8 @@
-import 'package:flutter_architecture/config/configuration.dart';
+import 'package:configuration/di/di_module.dart';
+import 'package:configuration/environment/build_config.dart';
+import 'package:configuration/network/interceptor/auth_interceptor.dart';
+import 'package:configuration/network/interceptor/token_interceptor.dart';
 import 'package:flutter_architecture/data/user/source/remote/user_api.dart';
-import 'package:flutter_architecture/di/injection/injection.dart';
 import 'dart:async';
 import 'package:dio/dio.dart';
 
@@ -32,7 +34,8 @@ class ApiModule extends DIModule {
     dio.interceptors.add(TokenInterceptor());
 
     /// Print Log (production mode removal)
-    if (BuildConfig.get()?.flavor !=null && BuildConfig.get()?.flavor != Flavor.RELEASE) {
+    if (BuildConfig.get()?.flavor != null &&
+        BuildConfig.get()?.flavor != Flavor.RELEASE) {
       dio.interceptors
           .add(LogInterceptor(requestBody: true, responseBody: true));
     }

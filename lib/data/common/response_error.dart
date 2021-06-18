@@ -2,8 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'response_error.g.dart';
 
-@JsonSerializable(nullable: false)
-class ResponseError{
+@JsonSerializable()
+class ResponseError {
   String message;
   int statusCode;
   String errorCode;

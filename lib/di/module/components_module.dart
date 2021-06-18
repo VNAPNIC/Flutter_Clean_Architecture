@@ -1,10 +1,9 @@
-import 'package:flutter_architecture/config/configuration.dart';
-import 'package:flutter_architecture/data/common/shared_preferences_manager.dart';
-import 'package:flutter_architecture/di/injection/injection.dart';
+import 'package:configuration/data/common/shared_preferences_manager.dart';
+import 'package:configuration/di/di_module.dart';
 
-class ComponentsModule extends DIModule{
+class ComponentsModule extends DIModule {
   @override
-  provides() async{
+  provides() async {
     getIt.registerSingleton(SharedPreferencesManager());
   }
 }

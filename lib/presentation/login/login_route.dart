@@ -1,6 +1,6 @@
-import 'package:flutter_architecture/config/configuration.dart';
+import 'package:configuration/di/di_module.dart';
+import 'package:configuration/route/route_define.dart';
 import 'package:flutter_architecture/data/user/repositories/user_repo.dart';
-import 'package:flutter_architecture/di/injection/injection.dart';
 import 'package:flutter_architecture/domain/login/usecases/login_usecases.dart';
 import 'package:flutter_architecture/presentation/login/cubit/login_cubit.dart';
 import 'package:flutter_architecture/presentation/login/ui/login_screen.dart';

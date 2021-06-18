@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:configuration/generated/l10n.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_architecture/data/common/api_exception.dart';
 import 'package:flutter_architecture/data/user/model/response/login_response.dart';
 import 'package:flutter_architecture/domain/login/usecases/login_usecases.dart';
-import 'package:flutter_architecture/generated/l10n.dart';
 import 'package:meta/meta.dart';
 
 part 'login_state.dart';
@@ -15,13 +15,13 @@ class LoginCubit extends Cubit<LoginState> {
 
   LoginCubit({this.loginUseCase}) : super(LoginInitial());
 
-  FutureOr<void> login({String? user, String? password}) async{
+  FutureOr<void> login({String? user, String? password}) async {
     try {
       emit(LoadingLoginState());
       LoginResponse? response = await loginUseCase?.login(user, password);
-      if(response == null){
+      if (response == null) {
         emit(ErrorLoginState(errorMessage: S.current.responseNull));
-      }else {
+      } else {
         emit(LoginSuccessfullyState(response: response));
       }
     } on ApiException catch (e) {

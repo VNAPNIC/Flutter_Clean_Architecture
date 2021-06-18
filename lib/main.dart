@@ -1,11 +1,11 @@
 import 'dart:async';
-
+import 'package:configuration/environment/env.dart';
+import 'package:configuration/generated/l10n.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_architecture/config/configuration.dart';
+import 'package:flutter_architecture/di/injection/injection.dart';
+import 'package:flutter_architecture/manifest.dart';
 import 'package:flutter_architecture/presentation/login/login_route.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
-import 'generated/l10n.dart';
 
 /// EndPoint default
 void main() => Main();
@@ -19,6 +19,11 @@ class Main extends Env {
     };
 
     return Application();
+  }
+
+  @override
+  Future? onInjection() async {
+    await Injection.inject();
   }
 }
 
