@@ -23,10 +23,10 @@ void main() {
     build: () {
       mockUseCase = LoginUserCaseMock();
       loginCubit = LoginCubit(loginUseCase: mockUseCase);
-      when(mockUseCase.login('VMO', 'VMO')).thenAnswer((_) async => response);
+      when(mockUseCase.login('test', 'test')).thenAnswer((_) async => response);
       return loginCubit;
     },
-    act: (cubit) async => await cubit.login(user: 'VMO', password: 'VMO'),
+    act: (cubit) async => await cubit.login(user: 'test', password: 'test'),
     expect: () =>
         [LoadingLoginState(), LoginSuccessfullyState(response: response)],
   );
@@ -39,7 +39,7 @@ void main() {
       when(mockUseCase.login(null, null)).thenAnswer((_) => throw TypeError());
       return loginCubit;
     },
-    act: (cubit) async => await cubit.login(user: 'VMO', password: 'VMO'),
+    act: (cubit) async => await cubit.login(user: 'test', password: 'test'),
     expect: () => [
       LoadingLoginState(),
       ErrorLoginState(errorMessage: S.current.connectionProblem)

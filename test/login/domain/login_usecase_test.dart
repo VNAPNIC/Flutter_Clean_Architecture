@@ -9,9 +9,9 @@ void main() {
     final mockRepository = LoginRepositoryMock();
     final useCase = LoginUseCase(mockRepository);
 
-    useCase.login('VMO', 'VMO');
+    useCase.login('test', 'test');
 
-    verify(mockRepository.login('VMO', 'VMO'))
+    verify(mockRepository.login('test', 'test'))
         .called(1);
   });
 }
