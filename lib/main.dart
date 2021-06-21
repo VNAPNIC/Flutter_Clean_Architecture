@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:configuration/environment/env.dart';
 import 'package:configuration/generated/l10n.dart';
+import 'package:configuration/route/route_define.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_architecture/di/injection/injection.dart';
 import 'package:flutter_architecture/manifest.dart';
@@ -46,7 +47,7 @@ class _ApplicationState extends State<Application> {
       locale: const Locale('en'),
       supportedLocales: S.delegate.supportedLocales,
       initialRoute: LoginRoute.id,
-      onGenerateRoute: manifest,
+      onGenerateRoute: (settings) => manifest(generateRoute, settings),
     );
   }
 }

@@ -17,3 +17,16 @@ class Path {
 
   Map<String, WidgetBuilder> path() => {name: builder};
 }
+
+MaterialPageRoute? manifest(Function generateRoute, RouteSettings settings) {
+  final Map<String?, WidgetBuilder?>? routeBuilders = <String, WidgetBuilder>{};
+
+  generateRoute(routeBuilders, settings);
+
+  final Widget Function(BuildContext context)? routeBuilder =
+      routeBuilders?[settings.name ?? ""];
+
+  return MaterialPageRoute(
+      builder: (context) => routeBuilder!(context),
+      settings: RouteSettings(name: settings.name));
+}

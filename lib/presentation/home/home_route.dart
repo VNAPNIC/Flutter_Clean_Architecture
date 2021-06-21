@@ -11,12 +11,13 @@ class HomeRoute extends RouteDefine {
   @override
   List<Path> initRoute(Object? arguments) => [
         Path(
-            name: id,
-            builder: (_) => BlocProvider(
-                create: (_) => getIt<HomeCubit>(),
-                child: HomeScreen(
-                    response: arguments == null
-                        ? null
-                        : arguments as LoginResponse))),
+          name: id,
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<HomeCubit>(),
+            child: HomeScreen(
+                response:
+                    arguments == null ? null : arguments as LoginResponse),
+          ),
+        ),
       ];
 }

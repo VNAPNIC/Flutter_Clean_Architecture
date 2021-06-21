@@ -13,10 +13,12 @@ class LoginRoute extends RouteDefine {
   @override
   List<Path> initRoute(Object? arguments) => [
         Path(
-            name: id,
-            builder: (_) => BlocProvider(
-                create: (_) => LoginCubit(
-                    loginUseCase: LoginUseCase(getIt<UserRepoImpl>())),
-                child: LoginScreen())),
+          name: id,
+          builder: (_) => BlocProvider(
+            create: (_) =>
+                LoginCubit(loginUseCase: LoginUseCase(getIt<UserRepoImpl>())),
+            child: LoginScreen(),
+          ),
+        ),
       ];
 }

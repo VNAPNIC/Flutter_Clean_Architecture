@@ -7,16 +7,3 @@ void generateRoute(
   LoginRoute().build(builders, settings);
   HomeRoute().build(builders, settings);
 }
-
-MaterialPageRoute? manifest(RouteSettings settings) {
-  final Map<String?, WidgetBuilder?>? routeBuilders = <String, WidgetBuilder>{};
-
-  generateRoute(routeBuilders, settings);
-
-  final Widget Function(BuildContext context)? routeBuilder =
-      routeBuilders?[settings.name ?? ""];
-
-  return MaterialPageRoute(
-      builder: (context) => routeBuilder!(context),
-      settings: RouteSettings(name: settings.name));
-}
