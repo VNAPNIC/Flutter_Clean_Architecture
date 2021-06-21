@@ -47,7 +47,7 @@ class _ApplicationState extends State<Application> {
       locale: const Locale('en'),
       supportedLocales: S.delegate.supportedLocales,
       initialRoute: LoginRoute.id,
-      onGenerateRoute: (settings) => manifest(generateRoute, settings),
+      onGenerateRoute: (settings) => manifest(generateRoutes, settings),
     );
   }
 }
