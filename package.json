@@ -6,7 +6,6 @@
   "scripts": {
     "setup": "npm install && npx lefthook install",
     "generate": "flutter pub run build_runner build --delete-conflicting-outputs",
-
     "init": "flutter pub get && npm run generate && cd configuration && npm run init"
   },
   "name": "flutter_architecture",
