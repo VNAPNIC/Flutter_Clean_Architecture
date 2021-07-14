@@ -16,17 +16,18 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
           print('listener $state');
           if (state is LoginSuccessfullyState) {
-            Navigator.pushNamed(context, HomeRoute.id,
-                arguments: state.response);
+            HomeRoute.push(context, state.response);
           }
         },
         buildWhen: (previous, current) => current is LoginInitial,
         builder: (context, state) {
           return Container(
             child: Center(
-              child: RaisedButton(
+              child: ElevatedButton(
                 onPressed: () {
-                  context.read<LoginCubit>().login(user: 'VMO', password: 'VMO');
+                  context
+                      .read<LoginCubit>()
+                      .login(user: 'VMO', password: 'VMO');
                 },
                 child: Text('Login'),
               ),

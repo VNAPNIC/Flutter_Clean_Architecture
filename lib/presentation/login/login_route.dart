@@ -8,10 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginRoute extends RouteDefine {
   static const id = 'login';
-  static const id_with_param = 'login_with_param';
 
   @override
-  List<Path> initRoute(Object? arguments) => [
+  List<Path> initRoute(Map? arguments) => [
         Path(
           name: id,
           builder: (_) => BlocProvider(
