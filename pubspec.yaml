@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+
+  intl: ^0.17.0
   # Design pattern
   flutter_bloc: ^7.0.1
   rxdart: ^0.27.1
@@ -22,6 +24,7 @@ dependencies:
   pedantic: ^1.11.1
   configuration:
     path: ./configuration
+  flutter_screenutil: ^5.0.0+2
 
 dev_dependencies:
   build_runner: ^2.0.0
@@ -36,7 +39,16 @@ dev_dependencies:
 #dependency_overrides:
 #  pedantic: ^1.9.0
 #  mockito: ^4.1.1
+flutter_intl:
+  enabled: true
+  class_name: S # Optional. Sets the name for the generated localization class. Default: S
+  main_locale: en # Optional. Sets the main locale used for generating localization files. Provided value should consist of language code and optional script and country codes separated with underscore (e.g. 'en', 'en_GB', 'zh_Hans', 'zh_Hans_CN'). Default: en
 
+  localizely: # Optional settings if you use Localizely platform. Read more: https://localizely.com/flutter-localization-workflow
+    project_id: # Configured manually or through 'Connect to Localizely' command. Get it from the https://app.localizely.com/projects page.
+    upload_overwrite: # Set to true if you want to overwrite translations with upload. Default: false
+    upload_as_reviewed: # Set to true if you want to mark uploaded translations as reviewed. Default: false
+    ota_enabled: # Set to true if you want to use Localizely Over-the-air functionality. Default: false
 flutter:
   uses-material-design: true
   assets:

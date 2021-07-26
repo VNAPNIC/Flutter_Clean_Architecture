@@ -1,5 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:configuration/generated/l10n.dart';
+import 'package:flutter_architecture/generated/l10n.dart';
 import 'package:flutter_architecture/data/user/model/response/login_response.dart';
 import 'package:flutter_architecture/presentation/login/cubit/login_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';

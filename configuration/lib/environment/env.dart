@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:configuration/environment/build_config.dart';
 import 'package:configuration/network/http_overrides.dart';
-import 'package:configuration/utility/style/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -23,7 +22,6 @@ abstract class Env {
 
       await onInjection();
       HttpOverrides.global = MyHttpOverrides();
-      Style.styleDefault();
       final StatefulWidget app = await onCreate();
 
       runApp(app);

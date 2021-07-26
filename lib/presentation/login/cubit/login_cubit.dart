@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:configuration/generated/l10n.dart';
+import 'package:flutter_architecture/generated/l10n.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_architecture/data/common/api_exception.dart';
 import 'package:flutter_architecture/data/user/model/response/login_response.dart';
