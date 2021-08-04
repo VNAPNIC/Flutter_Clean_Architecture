@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () {
                   context
                       .read<LoginCubit>()
-                      .login(user: 'VMO', password: 'VMO');
+                      .login(user: 'nankai1421@gmail.com', password: 'Abc@123456');
                 },
                 child: Text('Login'),
               ),

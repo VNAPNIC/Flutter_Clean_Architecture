@@ -1,1 +1,18 @@
-{}
+{
+  "connectionTimedOut": "The connection has timed out. Please try again",
+  "connectionProblem": "There are some problems with the connection. Please try again",
+  "invalidCredentials": "Invalid credentials",
+  "responseNull": "Response is null",
+  "invalid_credentials": "Invalid credentials",
+  "cancelled": "Cancelled",
+  "connect_timeout": "Connect timeout",
+  "receive_timeout": "Receive timeout",
+  "send_timeout": "Send timeout",
+  "connection_problem": "Connection problem",
+  "please_check_internet_connection": "Please check internet connection",
+  "server_error": "Server error.",
+  "unknown_error": "Unknown error",
+  "server_unknown_error": "Server unknown error",
+  "server_not_found": "Server not found",
+  "database_exception": "Database exception"
+}

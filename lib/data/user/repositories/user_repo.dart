@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter_architecture/data/common/api_exception.dart';
+import 'package:configuration/data/exceptions/api_exception.dart';
 import 'package:flutter_architecture/data/user/model/response/login_response.dart';
 import 'package:flutter_architecture/data/user/source/remote/user_api.dart';
 import 'package:flutter_architecture/domain/login/repositories/login_repository.dart';
