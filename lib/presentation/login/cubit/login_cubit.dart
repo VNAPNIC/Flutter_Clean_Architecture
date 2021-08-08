@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:configuration/data/exceptions/api_exception.dart';
 import 'package:configuration/generated/l10n.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_architecture/data/user/model/response/login_response.dart';
 import 'package:flutter_architecture/domain/login/usecases/login_usecases.dart';
 import 'package:meta/meta.dart';
