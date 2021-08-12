@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:configuration/generated/l10n.dart';
-import 'package:flutter_architecture/data/user/model/response/login_response.dart';
+import 'package:flutter_architecture/domain/login/entities/auth_entity.dart';
 import 'package:flutter_architecture/presentation/login/cubit/login_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -16,19 +16,19 @@ void main() {
     await TestUtilities.setupLocalization();
   });
 
-  final response = LoginResponse('KbseWdVo87DkmNDO9klriT8SNOkEWRZC');
+  final authEntity = AuthEntity('KbseWdVo87DkmNDO9klriT8SNOkEWRZC');
 
   blocTest<LoginCubit, LoginState>(
     'Test login bloc yield the right state successfully',
     build: () {
       mockUseCase = LoginUserCaseMock();
       loginCubit = LoginCubit(loginUseCase: mockUseCase);
-      when(mockUseCase.login('test', 'test')).thenAnswer((_) async => response);
+      when(mockUseCase.login('test', 'test')).thenAnswer((_) async => authEntity);
       return loginCubit;
     },
     act: (cubit) async => await cubit.login(user: 'test', password: 'test'),
     expect: () =>
-        [LoadingLoginState(), LoginSuccessfullyState(response: response)],
+        [LoadingLoginState(), LoginSuccessfullyState(authEntity: authEntity)],
   );
 
   blocTest<LoginCubit, LoginState>(
