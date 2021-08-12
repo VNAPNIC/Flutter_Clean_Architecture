@@ -1,4 +1,4 @@
-import 'package:flutter_architecture/domain/login/usecases/login_usecases.dart';
+import 'package:flutter_architecture/domain/login/use_cases/login_usecases.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 

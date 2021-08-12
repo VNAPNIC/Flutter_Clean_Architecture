@@ -16,7 +16,7 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
           print('listener $state');
           if (state is LoginSuccessfullyState) {
-            HomeRoute.push(context, state.response);
+            HomeRoute.push(context, state.authEntity);
           }
         },
         buildWhen: (previous, current) => current is LoginInitial,

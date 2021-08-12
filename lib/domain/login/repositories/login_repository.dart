@@ -1,5 +1,7 @@
-import 'package:flutter_architecture/data/user/model/response/login_response.dart';
+import 'dart:async';
+
+import 'package:flutter_architecture/domain/login/entities/auth_entity.dart';
 
 abstract class LoginRepository{
-  Future<LoginResponse?>? login(String? user, String? password);
+  FutureOr<AuthEntity?>? login(String? user, String? password);
 }

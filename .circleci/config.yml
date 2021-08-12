@@ -59,7 +59,7 @@ commands:
           command: mkdir -p ~/sdks/flutter && git clone -b stable https://github.com/flutter/flutter.git ~/sdks/flutter
       - run:
           name: Set flutter SDK PATH in bash
-          command: echo 'export FLUTTER_HOME=~/sdks/flutter' >> $BASH_ENV && source $BASH_ENV
+          command: echo 'export FLUTTER_HOME=~/sdks/flutter' >> $BASH_ENV && data_source $BASH_ENV
       - run:
           name: Try doctor
           command: $FLUTTER_HOME/bin/flutter doctor

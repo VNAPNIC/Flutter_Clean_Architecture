@@ -14,12 +14,12 @@ class LoadingLoginState extends LoginState {
 }
 
 class LoginSuccessfullyState extends LoginState {
-  final LoginResponse response;
+  final AuthEntity authEntity;
 
-  LoginSuccessfullyState({required this.response});
+  LoginSuccessfullyState({required this.authEntity});
 
   @override
-  List<Object> get props => [response];
+  List<Object> get props => [authEntity];
 }
 
 class ErrorLoginState extends LoginState {

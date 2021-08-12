@@ -1,4 +1,4 @@
-import 'package:configuration/data/source/local/sessions_pref.dart';
+import 'package:configuration/data/data_source/local/sessions_pref.dart';
 import 'package:dio/dio.dart';
 
 /// authentication by token
