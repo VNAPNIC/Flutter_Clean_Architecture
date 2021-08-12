@@ -1,1 +1,5 @@
-String logo = 'assets/images/logo.jpg';
+String logo = 'logo.jpg'.fromAssets;
+
+extension AssetsImage on String{
+  get fromAssets => 'assets/images/${this}';
+}
