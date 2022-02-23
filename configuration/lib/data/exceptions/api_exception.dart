@@ -1,14 +1,21 @@
 import 'dart:io';
-import 'package:configuration/data/common/base_response.dart';
+
 import 'package:configuration/data/common/response_code.dart';
 import 'package:configuration/generated/l10n.dart';
+import 'package:configuration/network/interceptor/data_format_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 
 class ApiException {
-  late int? errorCode;
-  late String? errorMessage = "";
-  late dynamic errorBody = "";
+  int? _errorCode = ResponseCode.CLIENT_UNKNOWN_ERROR;
+
+  get errorCode => _errorCode ?? ResponseCode.CLIENT_UNKNOWN_ERROR;
+
+  String? _errorMessage = ResponseCode.CLIENT_UNKNOWN_ERROR.message;
+
+  get errorMessage =>
+      _errorMessage ?? ResponseCode.CLIENT_UNKNOWN_ERROR.message;
+
   late DioError exception;
 
   String? get displayError {
@@ -26,7 +33,7 @@ class ApiException {
 
     if (exception.type == DioErrorType.other) {
       if (exception.error is SocketException) {
-        return S.current.please_check_internet_connection;
+        return S.current.connection_problem_desc;
       }
       return exception.error.toString();
     }
@@ -57,26 +64,20 @@ class ApiException {
     switch (exception.type) {
       case DioErrorType.response:
         {
-          dynamic data = exception.response?.data;
           try {
-            if (data is BaseResponse) {
-              errorMessage = data.code == ResponseCode.UNAUTHORIZED ||
-                      data.code == ResponseCode.FORBIDDEN
-                  ? S.current.invalid_credentials
-                  : data.code?.message ?? data.error;
-
-              errorCode = data.code;
-              errorBody = data.errorBody;
-            }
+            final code = exception.response?.code();
+            _errorMessage =
+                code?.message ?? ResponseCode.CLIENT_UNKNOWN_ERROR.message;
+            _errorCode = code;
           } catch (e) {
-            errorMessage = e.toString();
+            _errorMessage = e.toString();
             // Try to get Dio internal error which might due to service not available
             if (exception.error != null) {
-              errorMessage = exception.error.toString();
+              _errorMessage = exception.error.toString();
             }
             if (exception.response?.statusMessage != null &&
                 exception.response?.statusMessage?.isNotEmpty == true) {
-              errorMessage = exception.response?.statusMessage;
+              _errorMessage = exception.response?.statusMessage;
             }
           }
         }
@@ -86,28 +87,33 @@ class ApiException {
           switch (exception.type) {
             case DioErrorType.cancel:
               {
-                errorMessage = S.current.cancelled;
+                _errorMessage = S.current.cancelled;
                 break;
               }
             case DioErrorType.connectTimeout:
             case DioErrorType.receiveTimeout:
             case DioErrorType.sendTimeout:
               {
-                errorMessage = S.current.connect_timeout;
+                _errorMessage = S.current.connect_timeout;
+                _errorCode = ResponseCode.NOT_CONNECTION_INTERNET;
               }
               break;
             default:
               {
                 if (exception.response?.statusCode == HttpStatus.notFound) {
-                  errorMessage = S.current.server_not_found;
+                  _errorMessage = S.current.server_not_found;
+                  _errorCode = ResponseCode.SERVER_MAINTAIN;
                 }
                 if (exception.response?.statusCode ==
                     HttpStatus.serviceUnavailable) {
-                  errorMessage = S.current.server_unknown_error;
+                  _errorMessage = S.current.server_unknown_error;
+                  _errorCode = ResponseCode.CLIENT_UNKNOWN_ERROR;
                 } else if (exception.error is SocketException) {
-                  errorMessage = S.current.connection_problem;
+                  _errorMessage = S.current.connection_problem;
+                  _errorCode = ResponseCode.NOT_CONNECTION_INTERNET;
                 } else if (exception.error is HttpException) {
-                  errorMessage = S.current.connection_problem;
+                  _errorMessage = S.current.connection_problem;
+                  _errorCode = ResponseCode.NOT_CONNECTION_INTERNET;
                 }
               }
           }

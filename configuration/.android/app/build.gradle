@@ -6,12 +6,12 @@ android {
     compileSdkVersion 30
 
     compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     defaultConfig {
-        applicationId "com.example.configuration.host"
+        applicationId "com.tn.configuration.host"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1

@@ -1,6 +1,6 @@
-class StringUtils {
-  static String enumToName(String enumToString) {
-    final List<String> paths = enumToString.split('.');
+extension EnumToName on String{
+  String enumToName() {
+    final List<String> paths = split('.');
     return paths[1];
   }
 }

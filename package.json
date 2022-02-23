@@ -6,9 +6,13 @@
   "scripts": {
     "setup": "npm install && npx lefthook install",
     "generate": "flutter pub run build_runner build --delete-conflicting-outputs",
-    "init": "flutter pub get && npm run generate && cd configuration && npm run init"
+    "init": "flutter pub get && npm run generate && cd configuration && npm run init && cd .. && flutter pub run flutter_native_splash:create && dart run build_runner build",
+    "fixLintVital": "flutter run -t lib/main.dart --debug --flavor development && q && flutter run -t lib/main.dart --profile --flavor development && q && flutter run -t lib/main.dart --release --flavor development && q",
+    "releaseDevelopment": "flutter build apk --release --flavor development",
+    "releaseStaging": "flutter build apk --release --flavor staging",
+    "releaseProduct": "flutter build apk --release --flavor production"
   },
-  "name": "flutter_architecture",
+  "name": "ximedi-chat",
   "description": "* We want to determine what types of database that we use for storage (might want to change it later on)\r     * We want to adhere to SOLID principles since we are using OOP for this project.\r     * We want to ensure that UI layers do not care what is going on at the data layer at all.\r     * We might want to separate each layer into different packages.\r ##### 2. Presentation - Domain - Data.\r ##### 3. Presentation layer consist of\r     * Widgets\r     * Cubit\r     * Cubit only manages UI state based on business logic",
   "version": "1.0.0",
   "main": "index.js",
@@ -18,12 +22,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VNAPNIC/Flutter_Architecture.git"
+    "url": "git+https://bitbucket.org/hyperfin/ximedi-chat-flutter.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/VNAPNIC/Flutter_Architecture/issues"
+    "url": "https://bitbucket.org/hyperfin/ximedi-chat-flutter/issues"
   },
-  "homepage": "https://github.com/VNAPNIC/Flutter_Architecture#readme"
+  "homepage": "https://bitbucket.org/hyperfin/ximedi-chat-flutter#readme"
 }

@@ -1,91 +1,110 @@
-import 'package:flutter/material.dart';
-import 'package:logging/logging.dart';
 import 'package:configuration/utility/logging.dart';
 import 'package:configuration/utility/string_utils.dart';
+import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
-enum Flavor { DEVELOPMENT, STAGING, PREPROD, RELEASE }
+enum Flavor { DEVELOPMENT, STAGING, PRODUCTION }
 
 class BuildConfig {
-  const BuildConfig._(
-      {required this.baseUrl,
-      required this.socketUrl,
-      required this.connectTimeout,
-      required this.receiveTimeout,
-      required this.flavor,
-      this.color = Colors.blue});
+  BuildConfig._({
+    required this.baseUrl,
+    required this.websiteUrl,
+    required this.connectTimeout,
+    required this.receiveTimeout,
+    required this.stfConnectTimeout,
+    required this.stfReceiveTimeout,
+    required this.flavor,
+    this.color = Colors.blue,
+  }) {
+    Log.info(
+        "Environment",
+        '\nBuild Flavor:      $flavor\n'
+            'BaseUrl:           $baseUrl\n'
+            'WebsiteUrl:        $websiteUrl\n'
+            'ConnectTimeout:    $connectTimeout\n'
+            'ReceiveTimeout:    $receiveTimeout\n'
+            'stfConnectTimeout: $stfConnectTimeout\n'
+            'stfReceiveTimeout: $stfReceiveTimeout\n');
+  }
 
-  const BuildConfig._development()
+  BuildConfig._development()
       : this._(
-          baseUrl: 'http://.../',
-          socketUrl: '',
-          connectTimeout: 5000,
-          receiveTimeout: 5000,
+          baseUrl: '',
+          websiteUrl: '',
+          // 10 seconds
+          connectTimeout: 10000,
+          // 10 seconds
+          receiveTimeout: 10000,
+          // 3 minute
+          stfConnectTimeout: 300000,
+          // 3 minute
+          stfReceiveTimeout: 300000,
           flavor: Flavor.DEVELOPMENT,
         );
 
-  const BuildConfig._staging()
+  BuildConfig._staging()
       : this._(
-            baseUrl: 'http://.../',
-            socketUrl: '',
-            connectTimeout: 5000,
-            receiveTimeout: 5000,
-            flavor: Flavor.STAGING);
+          baseUrl: '',
+          websiteUrl: '',
+          // 10 seconds
+          connectTimeout: 10000,
+          // 10 seconds
+          receiveTimeout: 10000,
+          // 3 minute
+          stfConnectTimeout: 300000,
+          // 3 minute
+          stfReceiveTimeout: 300000,
+          flavor: Flavor.STAGING,
+        );
 
-  const BuildConfig._preprod()
+  BuildConfig._production()
       : this._(
-            baseUrl: 'http://.../',
-            socketUrl: '',
-            connectTimeout: 5000,
-            receiveTimeout: 5000,
-            flavor: Flavor.PREPROD);
-
-  const BuildConfig._release()
-      : this._(
-            baseUrl: 'http://.../',
-            socketUrl: '',
-            connectTimeout: 5000,
-            receiveTimeout: 5000,
-            flavor: Flavor.RELEASE);
+          baseUrl: '',
+          websiteUrl: '',
+          // 10 seconds
+          connectTimeout: 10000,
+          // 10 seconds
+          receiveTimeout: 10000,
+          // 3 minute
+          stfConnectTimeout: 300000,
+          // 3 minute
+          stfReceiveTimeout: 300000,
+          flavor: Flavor.PRODUCTION,
+        );
 
   static BuildConfig? _instance;
 
   static init({flavor}) {
-    if (_instance == null) {
-      print('╔══════════════════════════════════════════════════════════════╗');
-      print('                    Build Flavor: $flavor                       ');
-      print('╚══════════════════════════════════════════════════════════════╝');
-      switch (flavor) {
-        case 'development':
-          _instance = const BuildConfig._development();
-          break;
-        case 'staging':
-          _instance = const BuildConfig._staging();
-          break;
-        case 'preprod':
-          _instance = const BuildConfig._preprod();
-          break;
-        default:
-          _instance = const BuildConfig._release();
-          break;
-      }
+    switch (flavor) {
+      case 'development':
+        _instance = BuildConfig._development();
+        break;
+      case 'staging':
+        _instance = BuildConfig._staging();
+        break;
+      case 'production':
+        _instance = BuildConfig._production();
+        break;
+      default:
+        _instance = BuildConfig._development();
+        break;
     }
     _iniLog(flavor);
   }
 
-  static BuildConfig? get() {
-    return _instance;
+  static BuildConfig get() {
+    assert(_instance != null);
+    return _instance!;
   }
 
   static _iniLog(flavor) async {
-    await Log.init();
     switch (_instance?.flavor) {
       case Flavor.DEVELOPMENT:
       case Flavor.STAGING:
-      case Flavor.PREPROD:
-        Log.setLevel(Level.ALL);
+        Log.setLevel(Level.verbose);
         break;
-      case Flavor.RELEASE:
-        Log.setLevel(Level.OFF);
+      case Flavor.PRODUCTION:
+        Log.setLevel(Level.nothing);
         break;
       default:
         break;
@@ -93,18 +112,21 @@ class BuildConfig {
   }
 
   final String baseUrl;
-  final String socketUrl;
+  final String websiteUrl;
+
   final int connectTimeout;
   final int receiveTimeout;
+
+  final int stfConnectTimeout;
+  final int stfReceiveTimeout;
+
   final Flavor flavor;
   final Color color;
 
   static String flavorName() =>
-      StringUtils.enumToName(_instance?.flavor.toString() ?? "");
+      (_instance?.flavor.toString() ?? "").enumToName();
 
-  static bool isRelease() => _instance?.flavor == Flavor.RELEASE;
-
-  static bool isProduction() => _instance?.flavor == Flavor.PREPROD;
+  static bool isProduct() => _instance?.flavor == Flavor.PRODUCTION;
 
   static bool isStaging() => _instance?.flavor == Flavor.STAGING;
 

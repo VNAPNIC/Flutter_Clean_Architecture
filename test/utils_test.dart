@@ -5,6 +5,6 @@ enum EnumTest { ENUM_VALUE }
 void main() {
   test('enum to name', () {
     expect(
-        StringUtils.enumToName(EnumTest.ENUM_VALUE.toString()), 'ENUM_VALUE');
+        EnumTest.ENUM_VALUE.toString().enumToName(), 'ENUM_VALUE');
   });
 }

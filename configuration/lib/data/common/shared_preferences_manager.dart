@@ -1,23 +1,27 @@
+import 'package:configuration/data/data_source/local/pref/pref_key.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesManager {
-  static SharedPreferences? _sharedPreferences;
+  SharedPreferences? sharedPreferences;
 
-  SharedPreferencesManager() {
-    SharedPreferences.getInstance().then((value) {
-      _sharedPreferences = value;
-    });
-  }
+  SharedPreferencesManager(this.sharedPreferences);
 
   Future<bool?>? putString(String key, String value) =>
-      _sharedPreferences?.setString(key, value);
+      sharedPreferences?.setString(key, value);
 
-  String? getString(String key) => _sharedPreferences?.getString(key);
+  String? getString(String key) => sharedPreferences?.getString(key);
 
   Future<bool?>? putInt(String key, int value) =>
-      _sharedPreferences?.setInt(key, value);
+      sharedPreferences?.setInt(key, value);
 
-  int? getInt(String key) => _sharedPreferences?.getInt(key);
+  Future<bool?>? putBool(String key, bool value) =>
+      sharedPreferences?.setBool(key, value);
 
-  Future? clear() => _sharedPreferences?.clear();
+  bool? getBool(String key) => sharedPreferences?.getBool(key);
+
+  int? getInt(String key) => sharedPreferences?.getInt(key);
+
+  Future? clear() {
+    sharedPreferences?.remove(keyAccessToken);
+  }
 }

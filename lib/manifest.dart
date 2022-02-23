@@ -1,7 +1,9 @@
-import 'package:flutter_architecture/presentation/home/home_route.dart';
-import 'package:flutter_architecture/presentation/login/login_route.dart';
+import 'presentation/home_page/home_page_route.dart';
+
+const routerIds = {
+  HomePageRoute: 'HomePageRoute',
+};
 
 void generateRoutes() {
-  LoginRoute();
-  HomeRoute();
+  HomePageRoute();
 }

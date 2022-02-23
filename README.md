@@ -13,7 +13,6 @@
     * Cubit only manages UI state based on business logic
 
 ##### 4. Domain layer (Business logic layer)
-    * Repositories (interfaces aka idea how the logic would behave)
     * Entities (or models that UI needs)
     * Usecases (user stories)
     * Typically one function, but can be more if functions are related.
