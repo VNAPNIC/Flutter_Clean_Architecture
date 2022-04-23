@@ -1,10 +1,9 @@
-import 'package:configuration/generated/l10n.dart';
+import 'package:configuration/l10n/l10n.dart';
 import 'package:configuration/route/route_define.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_architecture/manifest.dart';
 import 'package:flutter_architecture/presentation/home_page/home_page_route.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
@@ -57,28 +56,23 @@ class _MainApplicationState extends State<MainApplication>
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      minTextAdapt: true,
-      designSize: const Size(375, 812),
-      builder: () =>
-          GetMaterialApp(
-            scaffoldMessengerKey: rootScaffoldMessengerKey,
-            localizationsDelegates: const [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-              S.delegate,
-            ],
-            supportedLocales: S.delegate.supportedLocales,
-            debugShowCheckedModeBanner: false,
-            locale: Get.deviceLocale,
-            fallbackLocale: const Locale('en'),
-            initialRoute: route,
-            onGenerateRoute: (settings) =>
-                manifest(
-                  generateRoutes,
-                  settings,
-                ),
+    return GetMaterialApp(
+      scaffoldMessengerKey: rootScaffoldMessengerKey,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        S.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+      debugShowCheckedModeBanner: false,
+      locale: Get.deviceLocale,
+      fallbackLocale: const Locale('en'),
+      initialRoute: route,
+      onGenerateRoute: (settings) =>
+          manifest(
+            generateRoutes,
+            settings,
           ),
     );
   }

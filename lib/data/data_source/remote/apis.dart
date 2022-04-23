@@ -6,6 +6,4 @@ part 'apis.g.dart';
 @RestApi()
 abstract class Apis {
   factory Apis(Dio dio, {String baseUrl}) = _Apis;
-
-
 }

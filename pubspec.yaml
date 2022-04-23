@@ -14,23 +14,36 @@ dependencies:
   configuration:
     path: ./configuration
   cupertino_icons: ^1.0.2
-  flutter_bloc: ^7.3.0
+  flutter_bloc: ^8.0.1
   cached_network_image: ^3.2.0
   equatable: ^2.0.3
   pedantic: ^1.11.1
-  flutter_screenutil: ^5.3.1
+
+  # firebase
+#  firebase_core: ^1.10.6
+#  firebase_analytics: ^9.1.2
+#  firebase_crashlytics: ^2.5.3
+
+  # DI
+  injectable: ^1.5.3
+  get_it: ^7.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^1.0.0
   retrofit_generator: any
   mockito: ^5.0.10
-  bloc_test: ^8.0.0
-  flutter_lints: ^1.0.0
-  build_runner: ^2.1.7
-  json_serializable: ^6.1.4
-  flutter_native_splash: ^1.2.1
-  flutter_launcher_icons: ^0.9.0
+  bloc_test: ^9.0.3
+  build_runner: ^2.1.8
+  json_serializable: ^6.1.5
+  change_app_package_name: ^1.0.0
+  injectable_generator: ^1.5.2
+  flutter_native_splash: ^2.1.6
+  flutter_flavorizr:
+    git:
+      url: git@github.com:VNAPNIC/flutter_flavorizr_one_main.git
+      ref: v2.1.2
 flutter:
   uses-material-design: true
   assets:
@@ -47,3 +60,70 @@ flutter:
         - asset: assets/fonts/SVNGilroyItalic.otf
         - asset: assets/fonts/SVNGilroyLight.otf
         - asset: assets/fonts/SVNGilroyLightItalic.otf
+
+# flutter icons setup
+flutter_icons:
+  android: 'launcher_icon'
+  ios: true
+  image_path: assets/images/logo.jpg
+
+flutter_assets_generator:
+  # Optional. Sets the directory of generated localization files. Provided value should be a valid path on lib dir. Default: generated
+  output_dir: generated
+  # Optional. Sets whether utomatic monitoring of file changes. Default: true
+  auto_detection: true
+  # Optional. Sets file name conversion rules. Default: true
+  named_with_parent: true
+  # Optional. Sets the name for the generated localization file. Default: assets
+  output_filename: assets
+  # Optional. Sets the name for the generated localization class. Default: Assets
+  class_name: Assets
+
+flavorizr:
+  app:
+    android:
+      flavorDimensions: "clean-architecture-flavor"
+    ios:
+
+  flavors:
+    prod:
+      app:
+        name: "CleanArchitecture"
+      android:
+        applicationId: "clean.architecture"
+        icon: ".config/ic_launcher/ic_launcher.png"
+#        firebase:
+#          config: ".config/firebase/prod/google-services.json"
+      ios:
+        bundleId: "com.clean.architecture"
+        icon: ".config/ic_launcher/ic_launcher.png"
+#        firebase:
+#          config: ".config/firebase/prod/GoogleService-Info.plist"
+
+    beta:
+      app:
+        name: "CleanArchitecture-Beta"
+      android:
+        applicationId: "clean.architecture.beta"
+        icon: ".config/ic_launcher/ic_launcher_beta.png"
+#        firebase:
+#          config: ".config/firebase/beta/google-services.json"
+      ios:
+        bundleId: "com.clean.architecture.beta"
+        icon: ".config/ic_launcher/ic_launcher_beta.png"
+#        firebase:
+#          config: ".config/firebase/beta/GoogleService-Info.plist"
+
+    qc:
+      app:
+        name: "CleanArchitecture-QC"
+      android:
+        applicationId: "clean.architecture.qc"
+        icon: ".config/ic_launcher/ic_launcher_qc.png"
+#        firebase:
+#          config: ".config/firebase/qc/google-services.json"
+      ios:
+        bundleId: "com.clean.architecture.qc"
+        icon: ".config/ic_launcher/ic_launcher_qc.png"
+#        firebase:
+#          config: ".config/firebase/qc/GoogleService-Info.plist"

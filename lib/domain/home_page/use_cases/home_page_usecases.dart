@@ -1,13 +1,21 @@
 import 'dart:async';
-import 'package:flutter_architecture/data/setting/models/request/get_setting_request.dart';
-import 'package:flutter_architecture/data/setting/models/response/get_setting_response.dart';
-import 'package:flutter_architecture/data/setting/repositories/impl/setting_repo.dart';
-import 'package:flutter_architecture/data/setting/repositories/setting_repository.dart';
 
+import 'package:flutter_architecture/domain/repositories/setting_repository.dart';
+import 'package:injectable/injectable.dart';
+import '../../../models/request/get_setting_request.dart';
+import '../../../models/setting/setting_model.dart';
+
+@injectable
 class HomepageUseCases {
   final SettingRepository settingRepo;
-  HomepageUseCases(this.settingRepo);
 
-  FutureOr<GetSettingResponse> getSetting(GetSettingRequest? request) =>
-      settingRepo.getSetting(request);
+  HomepageUseCases({required this.settingRepo});
+
+  FutureOr<SettingModel?> getSetting(String? param) async {
+    if(param == null) {
+      throw NullThrownError();
+    }
+    final response = await settingRepo.getSetting(GetSettingRequest(param));
+    return response?.data;
+  }
 }

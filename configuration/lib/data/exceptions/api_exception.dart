@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:configuration/data/common/response_code.dart';
-import 'package:configuration/generated/l10n.dart';
 import 'package:configuration/network/interceptor/data_format_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
+
+import '../../l10n/l10n.dart';
 
 class ApiException {
   int? _errorCode = ResponseCode.CLIENT_UNKNOWN_ERROR;
@@ -20,20 +21,20 @@ class ApiException {
 
   String? get displayError {
     if (exception.type == DioErrorType.connectTimeout) {
-      return S.current.connect_timeout;
+      return S.current.connectTimeout;
     }
 
     if (exception.type == DioErrorType.receiveTimeout) {
-      return S.current.receive_timeout;
+      return S.current.receiveTimeout;
     }
 
     if (exception.type == DioErrorType.sendTimeout) {
-      return S.current.send_timeout;
+      return S.current.sendTimeout;
     }
 
     if (exception.type == DioErrorType.other) {
       if (exception.error is SocketException) {
-        return S.current.connection_problem_desc;
+        return S.current.connectionProblemDesc;
       }
       return exception.error.toString();
     }
@@ -94,25 +95,25 @@ class ApiException {
             case DioErrorType.receiveTimeout:
             case DioErrorType.sendTimeout:
               {
-                _errorMessage = S.current.connect_timeout;
+                _errorMessage = S.current.connectTimeout;
                 _errorCode = ResponseCode.NOT_CONNECTION_INTERNET;
               }
               break;
             default:
               {
                 if (exception.response?.statusCode == HttpStatus.notFound) {
-                  _errorMessage = S.current.server_not_found;
+                  _errorMessage = S.current.serverNotFound;
                   _errorCode = ResponseCode.SERVER_MAINTAIN;
                 }
                 if (exception.response?.statusCode ==
                     HttpStatus.serviceUnavailable) {
-                  _errorMessage = S.current.server_unknown_error;
+                  _errorMessage = S.current.serverUnknownError;
                   _errorCode = ResponseCode.CLIENT_UNKNOWN_ERROR;
                 } else if (exception.error is SocketException) {
-                  _errorMessage = S.current.connection_problem;
+                  _errorMessage = S.current.connectionProblem;
                   _errorCode = ResponseCode.NOT_CONNECTION_INTERNET;
                 } else if (exception.error is HttpException) {
-                  _errorMessage = S.current.connection_problem;
+                  _errorMessage = S.current.connectionProblem;
                   _errorCode = ResponseCode.NOT_CONNECTION_INTERNET;
                 }
               }

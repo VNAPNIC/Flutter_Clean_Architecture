@@ -1,11 +1,12 @@
 {
-  "database_exception": "Database exception",
+  "databaseException": "Database exception",
   "cancelled": "Cancelled",
-  "connect_timeout": "Connect timeout",
-  "receive_timeout": "Receive timeout",
-  "send_timeout": "Send timeout",
-  "connection_problem": "Không có kết nối mạng",
-  "connection_problem_desc": "Vui lòng kiểm tra lại tín hiệu Wifi hoặc 3G/4G của bạn.",
-  "server_not_found": "Server not found",
-  "server_unknown_error": "Hệ thống có chút vấn đề"
+  "connectTimeout": "Connect timeout",
+  "receiveTimeout": "Receive timeout",
+  "sendTimeout": "Send timeout",
+  "connectionProblem": "Không có kết nối mạng",
+  "connectionProblemDesc": "Vui lòng kiểm tra lại tín hiệu Wifi hoặc 3G/4G của bạn.",
+  "serverNotFound": "Server not found",
+  "serverUnknownError": "Hệ thống có chút vấn đề",
+  "getSetting": "Get setting"
 }

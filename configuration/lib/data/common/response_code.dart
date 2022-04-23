@@ -1,5 +1,3 @@
-import 'package:configuration/generated/l10n.dart';
-
 class ResponseCode {
   // Error
   static const int SERVER_SUCCESSFULLY = 0;

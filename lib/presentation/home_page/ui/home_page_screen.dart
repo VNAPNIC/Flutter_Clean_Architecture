@@ -1,8 +1,8 @@
+import 'package:configuration/l10n/l10n.dart';
 import 'package:configuration/style/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_architecture/presentation/home_page/cubit/home_page_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({Key? key}) : super(key: key);
@@ -20,13 +20,13 @@ class _HomePageScreenState extends State<HomePageScreen> {
         return Scaffold(
           backgroundColor: mCWhite,
           body: Container(
-            margin: EdgeInsets.only(top: 100.h),
+            margin: const EdgeInsets.only(top: 100),
             child: Center(
               child: Column(
                 children: [
                   if (state is GetSettingSuccess) Text(state.resTest),
                   ElevatedButton(
-                    child: const Text('Get setting'),
+                    child:  Text(S.current.getSetting),
                     onPressed: () {
                       context.read<HomePageCubit>().getSetting("Thang nguyen ");
                     },
