@@ -1,25 +1,27 @@
-on: 
+on:
   push:
     branches:
-    - master
-    - release/*
-    - develop
+      - master
+      - release/*
+      - develop
   pull_request:
     branches:
-    - master
-    - develop
+      - master
+      - develop
 name: build and test app
 jobs:
   build:
-    name: install dependencies
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '2.8.0'
+          flutter-version: '2.16.x'
           channel: 'stable'
-
+          cache: true
+          cache-key: flutter # optional, change this to force refresh cache
+          cache-path: ${{ runner.tool_cache }}/flutter # optional, change this to specify the cache path
+          architecture: x64 # optional, x64 or arm64
       - run: flutter --version
       - run: flutter pub get
       - name: run tests
