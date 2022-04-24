@@ -25,4 +25,4 @@ jobs:
       - name: run tests
         run: flutter test --coverage
       - name: run codequality
-        run: flutter test --coverage
+        run: flutter analyze
