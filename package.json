@@ -1,18 +1,12 @@
 {
   "dependencies": {},
-  "devDependencies": {
-    "@arkweid/lefthook": "^0.7.2"
-  },
   "scripts": {
-    "setup": "npm install && npx lefthook install",
+    "semantic-release": "semantic-release",
+    "init": "flutter pub get && cd configuration && flutter pub get && cd .. && flutter pub run build_runner build --delete-conflicting-outputs && flutter pub run flutter_flavorizr && flutter pub run flutter_native_splash:create --path=flutter_native_splash.yaml",
     "generate": "flutter pub run build_runner build --delete-conflicting-outputs",
-    "init": "flutter pub get && npm run generate && cd configuration && npm run init && cd .. && flutter pub run flutter_native_splash:create && dart run build_runner build",
-    "fixLintVital": "flutter run -t lib/main.dart --debug --flavor development && q && flutter run -t lib/main.dart --profile --flavor development && q && flutter run -t lib/main.dart --release --flavor development && q",
-    "releaseDevelopment": "flutter build apk --release --flavor development",
-    "releaseStaging": "flutter build apk --release --flavor staging",
-    "releaseProduct": "flutter build apk --release --flavor production"
+    "test": "flutter test --coverage"
   },
-  "name": "ximedi-chat",
+  "name": "Flutter_Clean_Architecture/semantic-release-npm",
   "description": "* We want to determine what types of database that we use for storage (might want to change it later on)\r     * We want to adhere to SOLID principles since we are using OOP for this project.\r     * We want to ensure that UI layers do not care what is going on at the data layer at all.\r     * We might want to separate each layer into different packages.\r ##### 2. Presentation - Domain - Data.\r ##### 3. Presentation layer consist of\r     * Widgets\r     * Cubit\r     * Cubit only manages UI state based on business logic",
   "version": "1.0.0",
   "main": "index.js",
@@ -22,12 +16,30 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://bitbucket.org/hyperfin/ximedi-chat-flutter.git"
+    "url": "https://gitlab.com/VNAPNIC/Flutter_Clean_Architecture.git"
   },
+  "keywords": [
+    "gitlab",
+    "package",
+    "npm",
+    "registry",
+    "semantic-release",
+    "node"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://bitbucket.org/hyperfin/ximedi-chat-flutter/issues"
+    "url": "https://gitlab.com/VNAPNIC/Flutter_Clean_Architecture/issues"
   },
-  "homepage": "https://bitbucket.org/hyperfin/ximedi-chat-flutter#readme"
+  "homepage": "https://gitlab.com/VNAPNIC/Flutter_Clean_Architecture#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@arkweid/lefthook": "^0.7.2",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/gitlab": "^6.0.5",
+    "@semantic-release/npm": "^7.0.8",
+    "semantic-release": "^17.3.0"
+  }
 }

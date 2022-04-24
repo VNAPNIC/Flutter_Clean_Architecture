@@ -1,26 +1,26 @@
 part of style;
 
 //Padding
-double mPaddingLarge = 32.w;
-double mPaddingNormal = 12.w;
-double mPadding = 16.w;
+double mPaddingLarge = 32;
+double mPaddingNormal = 12;
+double mPadding = 16;
 
-double mMargin = 16.0.h;
+double mMargin = 16.0;
 
 // radius
-double mRadiusSmall = 2.r;
-double mRadiusNormal = 8.r;
-double mRadiusLarge = 16.r;
+double mRadiusSmall = 2;
+double mRadiusNormal = 8;
+double mRadiusLarge = 16;
 
 // Font
-double mH1 = 24.sp;
-double mH2 = 20.sp;
-double mH3 = 18.sp;
-double mH4 = 16.sp;
+double mH1 = 24;
+double mH2 = 20;
+double mH3 = 18;
+double mH4 = 16;
 
-double mFontSizePrimary = 16.sp;
-double mFontSizeSecondary = 14.sp;
-double mFontSizeSmall = 12.sp;
+double mFontSizePrimary = 16;
+double mFontSizeSecondary = 14;
+double mFontSizeSmall = 12;
 
 // Border
 roundedTextFieldBorder({Color? color}) {
@@ -31,7 +31,7 @@ roundedTextFieldBorder({Color? color}) {
 }
 
 // CaptchaWidget
-final paddingCaptcha = EdgeInsets.fromLTRB(16.w, 24.h, 16.w, 32.h);
+const paddingCaptcha = EdgeInsets.fromLTRB(16, 24, 16, 32);
 final decorationCaptcha = BoxDecoration(
   color: mCInk200,
   borderRadius: BorderRadius.circular(mRadiusNormal),

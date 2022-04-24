@@ -12,14 +12,14 @@ final mST48M =  TextStyle(
   fontFamily: 'SvnGilroy',
   fontWeight: FontWeight.w700,
   color: mCInk500,
-  fontSize: 48.0.sp,
+  fontSize: 48.0,
 );
 
 final mST48R =  TextStyle(
     fontFamily: 'SvnGilroy',
     fontWeight: FontWeight.w400,
     color: mCInk500,
-    fontSize: 48.0.sp,
+    fontSize: 48.0,
 
 );
 
@@ -27,7 +27,7 @@ final mST32M = TextStyle(
     fontFamily: 'SvnGilroy',
     fontWeight: FontWeight.w700,
     color: mCInk500,
-    fontSize: 32.0.sp,
+    fontSize: 32.0,
 
 );
 
@@ -35,7 +35,7 @@ final mST32R =  TextStyle(
     fontFamily: 'SvnGilroy',
     fontWeight: FontWeight.w400,
     color: mCInk500,
-    fontSize: 32.0.sp,
+    fontSize: 32.0,
 
 );
 
@@ -43,7 +43,7 @@ final mST24M = TextStyle(
     fontFamily: 'SvnGilroy',
     fontWeight: FontWeight.w700,
     color: mCInk500,
-    fontSize: 24.0.sp,
+    fontSize: 24.0,
 
 );
 
@@ -51,7 +51,7 @@ final mST24R = TextStyle(
     fontFamily: 'SvnGilroy',
     fontWeight: FontWeight.w400,
     color: mCInk500,
-    fontSize: 24.0.sp,
+    fontSize: 24.0,
 
 );
 
@@ -60,7 +60,7 @@ final mST20M = TextStyle(
     fontFamily: 'SvnGilroy',
     fontWeight: FontWeight.w700,
     color: mCInk500,
-    fontSize: 20.0.sp,
+    fontSize: 20.0,
 
 );
 
@@ -68,77 +68,77 @@ final mST20R = TextStyle(
   fontFamily: 'SvnGilroy',
   fontWeight: FontWeight.w400,
   color: mCInk500,
-  fontSize: 20.0.sp,
+  fontSize: 20.0,
 );
 
 final mST18M = TextStyle(
   fontFamily: 'Roboto',
   fontWeight: FontWeight.w500,
   color: mCInk500,
-  fontSize: 18.0.sp,
+  fontSize: 18.0,
 );
 
 final mST18R = TextStyle(
   fontFamily: 'Roboto',
   fontWeight: FontWeight.w400,
   color: mCInk500,
-  fontSize: 18.0.sp,
+  fontSize: 18.0,
 );
 
 final mST16M = TextStyle(
   fontFamily: 'Roboto',
   fontWeight: FontWeight.w500,
   color: mCInk500,
-  fontSize: 16.0.sp,
+  fontSize: 16.0,
 );
 
 final mST16R = TextStyle(
   fontFamily: 'Roboto',
   fontWeight: FontWeight.w400,
   color: mCInk500,
-  fontSize: 16.0.sp,
+  fontSize: 16.0,
 );
 
 final mST14M = TextStyle(
   fontFamily: 'Roboto',
   fontWeight: FontWeight.w500,
   color: mCInk500,
-  fontSize: 14.0.sp,
+  fontSize: 14.0,
 );
 
 final mST14R = TextStyle(
   fontFamily: 'Roboto',
   fontWeight: FontWeight.w400,
   color: mCInk500,
-  fontSize: 14.0.sp,
+  fontSize: 14.0,
 );
 
 final mST12M = TextStyle(
   fontFamily: 'Roboto',
   fontWeight: FontWeight.w500,
   color: mCInk500,
-  fontSize: 12.0.sp,
+  fontSize: 12.0,
 );
 
 final mST12R = TextStyle(
   fontFamily: 'Roboto',
   fontWeight: FontWeight.w400,
   color: mCInk500,
-  fontSize: 12.0.sp,
+  fontSize: 12.0,
 );
 
 final mST10M = TextStyle(
   fontFamily: 'Roboto',
   fontWeight: FontWeight.w500,
   color: mCInk500,
-  fontSize: 12.0.sp,
+  fontSize: 12.0,
 );
 
 final mST10R = TextStyle(
   fontFamily: 'Roboto',
   fontWeight: FontWeight.w400,
   color: mCInk500,
-  fontSize: 12.0.sp,
+  fontSize: 12.0,
 );
 
 //Old text style

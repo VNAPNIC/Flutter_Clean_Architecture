@@ -6,7 +6,7 @@
     * We want to adhere to SOLID principles since we are using OOP for this project.
     * We want to ensure that UI layers do not care what is going on at the data layer at all.
     * We might want to separate each layer into different packages.
-##### 2. Presentation - Domain - Data.
+##### 2. Presentation - Domain - Data - models.
 ##### 3. Presentation layer consist of
     * Widgets
     * Cubit
@@ -15,18 +15,21 @@
 ##### 4. Domain layer (Business logic layer)
     * Entities (or models that UI needs)
     * Usecases (user stories)
+    * Repositories interface
     * Typically one function, but can be more if functions are related.
     * Remember, one class has one responsibility only.
-
 
 ##### 5. Data layer (Data access layer)
     * source
         * remotes (API)
         * locals (Database)
-    * model
-        * request
-        * response
     * Repositories (Implementation from Domain layer)
+
+##### 6. Models (The `data model` common for domain layer and data layer)
+    * models
+    * request
+    * response
+
 We build this class working separately and not following logics of `Domain layer`. However, `Repositories` will still implement from `Domain layer`, but the `Domain layer` will follow each function, and the `Data layer` will follow the cluster of data defined on the server.
 For example: `Domain layer` has defined 2 layers of Login and Register features, but these two features are related to the API User cluster on the server, so in the `Data layer`, there will only be one Repo which is user and that Repo will implement 2 layers Login and Register of the `Domain layer`.
 
@@ -35,15 +38,7 @@ For example: `Domain layer` has defined 2 layers of Login and Register features,
 
 ### DI pattern
 `Dependency Injection` is a great design pattern that allows us to eliminate rigid dependencies between elements and it makes the application more flexible, easy to expand scales and maintain.
-In the project we use Plugin `get_it` to implement DI and we have also defined classes so you can easily implement `DI` in the `DI layer`.
-##### injection
-Inject modules
-##### module
-     * Declare the modules used in the project.
-     * All modules must extend "DIModule"
-     * The registers must be set in the func provides.
-     * When you want to call 1 DI just use the syntax. "getIt<My Component>()"
-     * Learn more about "get_it"
+In the project we use Plugin `get_it` and `injectable` to implement DI and we have also defined classes so you can easily implement `DI` in the `DI layer`.
 
 ### Routes
 The project has predefined Named routes RouteDefine + manifest
@@ -68,11 +63,9 @@ The project has predefined Named routes RouteDefine + manifest
 You can run the app using the commands
 
 ```
-## development: flutter run -t lib/main.dart --debug --flavor development
+## development: flutter run -t lib/main.dart --debug --flavor beta
 
-## staging: flutter run -t lib/main.dart --debug --flavor staging
-
-## preprod: flutter run -t lib/main.dart --debug --flavor preprod
+## staging: flutter run -t lib/main.dart --debug --flavor prod
 ```
 
 ##### Build App
@@ -81,21 +74,17 @@ You can build the app using the commands
 for Android
 
 ```
-## development: flutter build apk -t lib/main.dart --flavor development
+## development: flutter build apk -t lib/main.dart --flavor beta
 
-## staging: flutter build apk -t lib/main.dart --flavor staging
-
-## preprod: flutter build apk -t lib/main.dart --flavor preprod
+## staging: flutter build apk -t lib/main.dart --flavor prod
 ```
 
 for IOS
 
 ```
-## development flutter build ios -t lib/main.dart --flavor development
+## development flutter build ios -t lib/main.dart --flavor beta
 
-## staging: flutter build ios -t lib/main.dart --flavor staging
-
-## preprod: flutter build ios -t lib/main.dart --flavor preprod
+## staging: flutter build ios -t lib/main.dart --flavor prod
 ```
 
 ### resources

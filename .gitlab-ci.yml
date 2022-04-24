@@ -1,119 +1,134 @@
-image: cirrusci/flutter:1.22.0
-
-stages:
-  - build
+stages: # List of stages for jobs, and their order of execution
+  - analyze
   - test
+  - coverage
+  - semantic-version
 
-before_script:
-#  - curl -sL firebase.tools | bash
-  - flutter pub get
-  - flutter pub run build_runner build
-  - flutter pub global activate pubspec_version
-  - flutter pub global activate intl_utils
-  - flutter pub global run intl_utils:generate
-  - FLUTTER_VERSION=`flutter pub global run pubspec_version:pubver get`
-  - export BUILD_VERSION=$(echo $FLUTTER_VERSION | cut -d "+" -f1)
-  - export BUILD_NUMBER=$(echo $FLUTTER_VERSION | cut -d "+" -f2)
-  - export BUILD_NUMBER=$CI_PIPELINE_IID
-  - echo Build Version $BUILD_VERSION
-  - echo Build Number $BUILD_NUMBER
-  - git log -1 --pretty="- %s" > release_notes/notes.txt
-  - mkdir $CI_PROJECT_DIR/android/app/src/production
-  - if [ -n "$B64_KEYSTORE_PROPERTIES" ]; then echo $B64_KEYSTORE_PROPERTIES | base64 --decode > $CI_PROJECT_DIR/android/app/keystore.properties; fi
-  - if [ -n "$B64_KEYSTORE" ]; then echo $B64_KEYSTORE | base64 --decode > $CI_PROJECT_DIR/android/app/master.keystore; fi
+default:
+  image: cirrusci/flutter:latest
 
-androidDevAuto: &androidDev
-  stage: build
+cache:
+  paths:
+    - /flutter/bin/cache/dart-sdk
+
+include:
+  - template: Code-Quality.gitlab-ci.yml
+
+code_quality:
+  stage: analyze
+  before_script:
+#    - git config --global url."https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/technixo/flavorizr".insteadOf "git@gitlab.com:technixo/flavorizr.git"
+#    - git submodule sync && git submodule update --init
+    - pub global activate dart_code_metrics
+    - export PATH="$PATH":"$HOME/.pub-cache/bin"
   script:
-    - export BUILD_COLOR="#2AB1EE"
-    - export BUILD_FLAVOR="Dev"
-    - export BUILD_FLAVOR_KEY="development"
-    - flutter build apk --flavor $BUILD_FLAVOR_KEY --build-number $BUILD_NUMBER
-    - keytool -printcert -jarfile build/app/outputs/apk/$BUILD_FLAVOR_KEY/release/app-$BUILD_FLAVOR_KEY-release.apk
+    - flutter --version
+    - flutter analyze
+    - metrics lib -r codeclimate  > gl-code-quality-report.json
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop" && $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      allow_failure: true
+
   artifacts:
-    name: "$CI_JOB_STAGE-$BUILD_NUMBER-$CI_COMMIT_SHORT_SHA"
-    paths:
-      - build/app/outputs
-  only:
-    - develop
+    paths: [gl-code-quality-report.json]
 
-androidDev:
-  <<: *androidDev
-  when: manual
-  only:
-    - /^bugfix/.*$/
-    - /^feature/.*$/
-    - /^epic/.*$/
-    - /^hotfix/.*$/
-    - /^refactor/.*$/
-
-androidStagingAuto: &androidStaging
-  stage: build
-  script:
-    - export BUILD_COLOR="#2AB1EE"
-    - export BUILD_FLAVOR="Staging"
-    - export BUILD_FLAVOR_KEY="staging"
-    - flutter build apk --flavor $BUILD_FLAVOR_KEY --build-number $BUILD_NUMBER
-    - keytool -printcert -jarfile build/app/outputs/apk/$BUILD_FLAVOR_KEY/release/app-$BUILD_FLAVOR_KEY-release.apk
-  artifacts:
-    name: "$CI_JOB_STAGE-$BUILD_NUMBER-$CI_COMMIT_SHORT_SHA"
-    paths:
-      - build/app/outputs
-  only:
-    - /^release/.*$/
-
-androidStaging:
-  <<: *androidStaging
-  when: manual
-  only:
-    - /^bugfix/.*$/
-    - /^feature/.*$/
-    - /^epic/.*$/
-    - /^hotfix/.*$/
-    - develop
-
-androidPreprod:
-  stage: build
-  when: manual
-  script:
-    - export BUILD_COLOR="#2AB1EE"
-    - export BUILD_FLAVOR="Preprod"
-    - export BUILD_FLAVOR_KEY="preprod"
-    - flutter build apk --flavor $BUILD_FLAVOR_KEY --build-number $BUILD_NUMBER
-    - keytool -printcert -jarfile build/app/outputs/apk/$BUILD_FLAVOR_KEY/release/app-$BUILD_FLAVOR_KEY-release.apk
-  artifacts:
-    name: "$CI_JOB_STAGE-$BUILD_NUMBER-$CI_COMMIT_SHORT_SHA"
-    paths:
-      - build/app/outputs
-  only:
-    - /^release/.*$/
-    - /^hotfix/.*$/
-
-androidProduction:
-  stage: build
-  when: manual
-  script:
-    - export BUILD_COLOR="#2AB1EE"
-    - export BUILD_FLAVOR="Production"
-    - export BUILD_FLAVOR_KEY="production"
-    - flutter build apk --flavor $BUILD_FLAVOR_KEY --build-number $BUILD_NUMBER
-    - keytool -printcert -jarfile build/app/outputs/apk/$BUILD_FLAVOR_KEY/release/app-$BUILD_FLAVOR_KEY-release.apk
-  artifacts:
-    name: "$CI_JOB_STAGE-$BUILD_NUMBER-$CI_COMMIT_SHORT_SHA"
-    paths:
-      - build/app/outputs
-  only:
-    - /^release/.*$/
-    - master
-
-test:
+test-all:
   stage: test
-  when: always
+#  before_script:
+#    - git config --global url."https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/technixo/flavorizr".insteadOf "git@gitlab.com:technixo/flavorizr.git"
+#    - git submodule sync && git submodule update --init
   script:
-    - flutter test --coverage
+    - export PATH="$PATH":"$HOME/.pub-cache/bin"
+    - pub global activate junitreport
+    - flutter test --machine --coverage | tojunit -o report.xml
   only:
-    - /^bugfix/.*$/
-    - /^feature/.*$/
-    - /^epic/.*$/
-    - /^hotfix/.*$/
-    - develop
+    refs:
+      - master
+      - develop
+  artifacts:
+    paths:
+      - coverage
+    reports:
+      junit: report.xml
+
+test-dev:
+  stage: test
+#  before_script:
+#    - git config --global url."https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/technixo/flavorizr".insteadOf "git@gitlab.com:technixo/flavorizr.git"
+#    - git submodule sync && git submodule update --init
+  script:
+    - export PATH="$PATH":"$HOME/.pub-cache/bin"
+    - pub global activate junitreport
+    - flutter test --machine | tojunit -o report.xml
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  artifacts:
+    reports:
+      junit: report.xml
+
+coverage: # This job runs in the test stage.
+  stage: coverage # It only starts when the job in the build stage completes successfully.
+  script:
+    - lcov --summary coverage/lcov.info
+    - lcov --remove coverage/lcov.info
+      "lib/config/*"
+      "lib/application/l10n/l10n.dart"
+      "lib/application/l10n/**/*"
+      "lib/domain/repositories/*"
+      "lib/injection.config.dart"
+      "lib/presentation/routes/*"
+      "lib/infrastructure/repositories/firebase_injectable_module.dart"
+      "**/mock_*.dart"
+      "**/*.g.dart"
+      "**/*.gr.dart"
+      "**/*.freezed.dart"
+      "**/*.mocks.dart"
+      "**/*.config.dart"
+      -o coverage/clean_lcov.info
+    - genhtml coverage/clean_lcov.info --output=coverage
+    - curl -Os https://uploader.codecov.io/latest/linux/codecov
+    - chmod +x codecov
+    - ./codecov -t $CODECOV_TOKEN
+    - mv coverage/ public/
+  only:
+    refs:
+      - master
+      - develop
+  coverage: '/lines\.*: \d+\.\d+\%/'
+  artifacts:
+    paths:
+      - public
+
+variables:
+  NPM_TOKEN: ${CI_JOB_TOKEN}
+
+# semantic-version:
+#   image: node:16
+#   stage: semantic-version
+#   before_script:
+#     - npm ci --cache .npm --prefer-offline
+#     - |
+#       {
+#         echo "@${CI_PROJECT_ROOT_NAMESPACE}:registry=${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/npm/"
+#         echo "${CI_API_V4_URL#https?}/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=\${CI_JOB_TOKEN}"
+#       } | tee -a .npmrc
+#   cache:
+#     key: ${CI_COMMIT_REF_SLUG}
+#     paths:
+#       - .npm/
+#   only:
+#     refs:
+#       - master
+#       - develop
+#   after_script:
+#     - git config --global http.emptyAuth true
+#     # Semantic Release - Label code (only once)
+#     - npx -p @semantic-release/changelog -p semantic-release -p @semantic-release/gitlab -p @semantic-release/commit-analyzer -p @semantic-release/release-notes-generator semantic-release
+#   script:
+#     - touch CHANGELOG.md
+#     - npm install @semantic-release/gitlab @semantic-release/changelog
+#     - npx semantic-release
+#   artifacts:
+#     paths:
+#       - CHANGELOG.md
